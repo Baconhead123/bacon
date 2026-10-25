@@ -28,6 +28,7 @@ local function loadScript()
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "BaconScriptGUI_" .. math.random(10000,99999)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.IgnoreGuiInset = true
     ScreenGui.Parent = CoreGui
     
     -- 主窗口（减小三分之一）
@@ -39,8 +40,13 @@ local function loadScript()
     MainFrame.BorderSizePixel = 0
     MainFrame.Active = true
     MainFrame.Draggable = true
-    MainFrame.Visible = false
+    MainFrame.Visible = true
     MainFrame.Parent = ScreenGui
+
+    -- 独立缩放组件：新按钮控制整体 1.5 倍缩放，不影响原有最小化按钮
+    local MainUIScale = Instance.new("UIScale")
+    MainUIScale.Scale = 1
+    MainUIScale.Parent = MainFrame
     
     -- 添加阴影效果
     local Shadow = Instance.new("ImageLabel")
@@ -84,7 +90,7 @@ local function loadScript()
     TitleBar.Parent = MainFrame
     
     local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Size = UDim2.new(1, -67, 1, 0)
+    TitleLabel.Size = UDim2.new(1, -95, 1, 0)
     TitleLabel.Position = UDim2.new(0, 10, 0, 0)
     TitleLabel.BackgroundTransparency = 1
     TitleLabel.Text = "培根脚本 v6.4"
@@ -96,6 +102,21 @@ local function loadScript()
     TitleLabel.Parent = TitleBar
     
     -- 控制按钮
+    -- 新增：平板适配用的 1.5 倍放大/恢复按钮，放在原最小化按钮左侧
+    local ScaleButton = Instance.new("TextButton")
+    ScaleButton.Name = "ScaleButton"
+    ScaleButton.Size = UDim2.new(0, 20, 0, 20)
+    ScaleButton.Position = UDim2.new(1, -71, 0, 3.5)
+    ScaleButton.BackgroundColor3 = Color3.fromRGB(80, 120, 210)
+    ScaleButton.BackgroundTransparency = 0.15
+    ScaleButton.Text = "1.5×"
+    ScaleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    ScaleButton.TextSize = 10
+    ScaleButton.Font = Enum.Font.GothamBold
+    ScaleButton.ZIndex = 6
+    Instance.new("UICorner", ScaleButton).CornerRadius = UDim.new(0, 5.3)
+    ScaleButton.Parent = TitleBar
+
     local MinimizeButton = Instance.new("TextButton")
     MinimizeButton.Size = UDim2.new(0, 20, 0, 20)
     MinimizeButton.Position = UDim2.new(1, -47, 0, 3.5)
@@ -752,6 +773,25 @@ local function loadScript()
         wait(0.5)
         notification:Destroy()
     end
+
+    local scaleEnlarged = false
+    local scaleTween = nil
+    ScaleButton.MouseButton1Click:Connect(function()
+        playClickSound()
+        scaleEnlarged = not scaleEnlarged
+        if scaleTween then
+            scaleTween:Cancel()
+            scaleTween = nil
+        end
+        local targetScale = scaleEnlarged and 1.5 or 1
+        ScaleButton.Text = scaleEnlarged and "1×" or "1.5×"
+        scaleTween = TweenService:Create(
+            MainUIScale,
+            TweenInfo.new(0.28, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {Scale = targetScale}
+        )
+        scaleTween:Play()
+    end)
 
     -- UI控制
     local minimized = false
@@ -2869,48 +2909,36 @@ print("安全版自然灾害免疫已激活")
         end
     end
 
-    -- 启动动画
-    local startupFrame = Instance.new("Frame")
-    startupFrame.Size = UDim2.new(1, 0, 1, 0)
-    startupFrame.BackgroundTransparency = 1
-    startupFrame.ZIndex = 100
-    startupFrame.Parent = ScreenGui
-    
-    local startupLabel = Instance.new("TextLabel")
-    startupLabel.Size = UDim2.new(0, 200, 0, 66.7)
-    startupLabel.Position = UDim2.new(0.5, -100, 0.5, -33.35)
-    startupLabel.BackgroundTransparency = 1
-    startupLabel.Text = "培根脚本 v6.4\n加载中..."
-    startupLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
-    startupLabel.TextSize = 24
-    startupLabel.Font = Enum.Font.GothamBold
-    startupLabel.ZIndex = 101
-    startupLabel.Parent = startupFrame
+    -- 直接显示主界面：移除脚本执行时的“加载中/加载完成”启动动画
+    MainFrame.Visible = true
 
-    spawn(function()
-        for i = 1, 5 do
-            startupLabel.Text = "培根脚本 v6.4\n加载中" .. string.rep(".", i)
-            wait(0.5)
+    -- 初始设置（保留原有逻辑）
+    local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = walkSpeed
+        humanoid.JumpPower = jumpPower
+    end
+    selectPlayer()
+
+    -- 防拖出屏幕：持续将主窗口限制在当前屏幕可见范围内，兼容缩放动画与屏幕尺寸变化
+    RunService.RenderStepped:Connect(function()
+        if not ScreenGui.Parent or not MainFrame.Parent then
+            return
         end
-        startupLabel.Text = "培根脚本 v6.4\n加载完成!"
-        TweenService:Create(startupLabel, TweenInfo.new(1.5), {TextTransparency = 1}):Play()
-        wait(1.5)
-        startupFrame:Destroy()
-        
-        MainFrame.Visible = true
-        MainFrame.Position = UDim2.new(1.5, -233.5, 0.5, -150)
-        TweenService:Create(MainFrame, TweenInfo.new(0.8), {Position = UDim2.new(0.5, -233.5, 0.5, -150)}):Play()
-        
-        showNotification("培根脚本 v6.4 已加载!", Color3.fromRGB(0, 200, 255))
-        
-        -- 初始设置
-        local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if humanoid then
-            humanoid.WalkSpeed = walkSpeed
-            humanoid.JumpPower = jumpPower
+        local camera = Workspace.CurrentCamera
+        if not camera then
+            return
         end
-        
-        selectPlayer()
+        local viewport = camera.ViewportSize
+        local frameSize = MainFrame.AbsoluteSize
+        local currentPos = MainFrame.AbsolutePosition
+        local maxX = math.max(0, viewport.X - frameSize.X)
+        local maxY = math.max(0, viewport.Y - frameSize.Y)
+        local clampedX = math.clamp(currentPos.X, 0, maxX)
+        local clampedY = math.clamp(currentPos.Y, 0, maxY)
+        if math.abs(clampedX - currentPos.X) > 0.5 or math.abs(clampedY - currentPos.Y) > 0.5 then
+            MainFrame.Position = UDim2.fromOffset(clampedX, clampedY)
+        end
     end)
 
     -- 角色重生处理
