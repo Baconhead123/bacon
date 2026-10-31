@@ -941,6 +941,7 @@ local function loadScript()
     -- UI控制
     local minimized = false
     local minimizeTween = nil
+    local normalBackgroundColor = nil
     local function toggleMinimize()
         playClickSound()
         minimized = not minimized
@@ -955,6 +956,15 @@ local function loadScript()
             TabFrame.Visible = false
             MainContent.Visible = false
             MinimizeButton.Text = "+"
+            -- 缩小时背景改为纯黑
+            if not normalBackgroundColor then
+                normalBackgroundColor = MainFrame.BackgroundColor3
+            end
+            BackgroundImage.Visible = false
+            MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            MainFrame.BackgroundTransparency = 0
+            local glass = MainFrame:FindFirstChildOfClass("UIGradient")
+            if glass then glass.Enabled = false end
             minimizeTween = TweenService:Create(
                 MainFrame,
                 TweenInfo.new(0.3),
@@ -965,6 +975,14 @@ local function loadScript()
             TabFrame.Visible = true
             MainContent.Visible = true
             MinimizeButton.Text = "_"
+            -- 放大恢复原背景
+            BackgroundImage.Visible = true
+            if normalBackgroundColor then
+                MainFrame.BackgroundColor3 = normalBackgroundColor
+                normalBackgroundColor = nil
+            end
+            local glass = MainFrame:FindFirstChildOfClass("UIGradient")
+            if glass then glass.Enabled = true end
             minimizeTween = TweenService:Create(
                 MainFrame,
                 TweenInfo.new(0.3),
