@@ -81,7 +81,7 @@ local function loadScript()
     local TitleBar = Instance.new("Frame")
     TitleBar.Size = UDim2.new(1, 0, 0, 27)
     TitleBar.BackgroundColor3 = Color3.fromRGB(225, 238, 255)
-    TitleBar.BackgroundTransparency = 0.88
+    TitleBar.BackgroundTransparency = 1
     TitleBar.BorderSizePixel = 0
     TitleBar.ZIndex = 5
     Instance.new("UICorner", TitleBar).CornerRadius = UDim.new(0, 11)
@@ -127,8 +127,8 @@ local function loadScript()
     TitleLabel.Size = UDim2.new(1, -95, 1, 0)
     TitleLabel.Position = UDim2.new(0, 10, 0, 0)
     TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Text = "培根脚本 v6.4"
-    TitleLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+    TitleLabel.Text = "培根脚本"
+    TitleLabel.TextColor3 = Color3.fromRGB(0, 150, 255)
     TitleLabel.TextSize = 20
     TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
     TitleLabel.Font = Enum.Font.GothamBold
@@ -182,7 +182,7 @@ local function loadScript()
     TabFrame.Size = UDim2.new(0, 100, 1, -27)
     TabFrame.Position = UDim2.new(0, 0, 0, 27)
     TabFrame.BackgroundColor3 = Color3.fromRGB(180, 205, 240)
-    TabFrame.BackgroundTransparency = 0.91
+    TabFrame.BackgroundTransparency = 1
     TabFrame.ZIndex = 3
     Instance.new("UICorner", TabFrame).CornerRadius = UDim.new(0, 11)
     TabFrame.Parent = MainFrame
@@ -229,7 +229,7 @@ local function loadScript()
         local tabButton = Instance.new("TextButton")
         tabButton.Size = UDim2.new(1, -6.7, 0, 23.3)
         tabButton.BackgroundColor3 = Color3.fromRGB(40, 40, 80)
-        tabButton.BackgroundTransparency = 0.3
+        tabButton.BackgroundTransparency = 1
         tabButton.Text = tabName
         tabButton.TextColor3 = Color3.fromRGB(200, 200, 255)
         tabButton.TextSize = 12
@@ -299,7 +299,6 @@ local function loadScript()
                 tooltip.ZIndex = 100
                 tooltip.Visible = false
                 Instance.new("UICorner", tooltip).CornerRadius = UDim.new(0, 5.3)
-                Instance.new("UIStroke", tooltip).Color = Color3.fromRGB(0, 150, 255)
                 tooltip.Parent = buttonFrame
                 
                 tooltip.Visible = true
@@ -317,12 +316,12 @@ local function loadScript()
         end
         
         button.MouseEnter:Connect(function()
-            button.BackgroundTransparency = 0.76
+            button.BackgroundTransparency = 1
             -- 高亮由玻璃渐变与弹性缩放承担，不绘制边框
         end)
         
         button.MouseLeave:Connect(function()
-            button.BackgroundTransparency = 0.86
+            button.BackgroundTransparency = 1
             -- 恢复默认玻璃状态
         end)
         
@@ -657,17 +656,6 @@ local function loadScript()
         textLabel.Parent = AnnouncementScrolling
     end
     
-    -- 最后一行文本
-    local lastText = Instance.new("TextLabel")
-    lastText.Size = UDim2.new(1, 0, 0, 20)
-    lastText.BackgroundTransparency = 1
-    lastText.Text = "脚本作者: Bacon head"
-    lastText.TextColor3 = Color3.fromRGB(255, 255, 255)
-    lastText.TextSize = 14
-    lastText.Font = Enum.Font.GothamBold
-    lastText.TextWrapped = true
-    lastText.ZIndex = 5
-    lastText.Parent = AnnouncementScrolling
     
     -- 选项卡切换
     for tabName, tabButton in pairs(TabButtons) do
@@ -699,19 +687,16 @@ local function loadScript()
             -- 更新选项卡按钮颜色
             for tName, tButton in pairs(TabButtons) do
                 if tName == tabName then
-                    tButton.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
-                    tButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    tButton.TextColor3 = Color3.fromRGB(0, 150, 255)
                 else
-                    tButton.BackgroundColor3 = Color3.fromRGB(40, 40, 80)
-                    tButton.TextColor3 = Color3.fromRGB(200, 200, 255)
+                    tButton.TextColor3 = Color3.fromRGB(255, 255, 255)
                 end
             end
         end)
     end
 
     -- 默认显示公告
-    TabButtons["公告"].BackgroundColor3 = Color3.fromRGB(0, 150, 255)
-    TabButtons["公告"].TextColor3 = Color3.fromRGB(255, 255, 255)
+    TabButtons["公告"].TextColor3 = Color3.fromRGB(0, 150, 255)
     AnnouncementScrolling.Visible = true
     ContentScrolling.Visible = false
 
@@ -1068,8 +1053,6 @@ local function loadScript()
         
         fullScreenEffectActive = true
         
-        -- 显示通知
-        showNotification("免费R币特效已启动!", Color3.fromRGB(255, 100, 0))
     end
 
     -- 显示碰撞箱功能
@@ -1079,7 +1062,7 @@ local function loadScript()
         
         if showCollision then
             ButtonInstances.CollisionBoxButton.Text = "显示碰撞箱 [开启]"
-            ButtonInstances.CollisionBoxButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.CollisionBoxButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             -- 显示碰撞箱
             for _, obj in pairs(Workspace:GetDescendants()) do
@@ -1117,7 +1100,7 @@ local function loadScript()
         
         if aimbotEnabled then
             ButtonInstances.AimbotButton.Text = "自瞄 [开启]"
-            ButtonInstances.AimbotButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.AimbotButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             -- 自瞄逻辑
             connections.aimbot = RunService.RenderStepped:Connect(function()
@@ -1183,7 +1166,7 @@ local function loadScript()
         
         if playerESPEnabled then
             ButtonInstances.PlayerESPButton.Text = "透视玩家 [开启]"
-            ButtonInstances.PlayerESPButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.PlayerESPButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             -- 为所有玩家创建高亮
             local function createESP(player)
@@ -1316,7 +1299,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         noclip = not noclip
         ButtonInstances.NoclipButton.Text = "穿墙模式 [" .. (noclip and "开启]" or "关闭]")
-        ButtonInstances.NoclipButton.TextColor3 = noclip and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.NoclipButton.TextColor3 = noclip and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if noclip then
             connections.noclip = RunService.Stepped:Connect(function()
@@ -1355,7 +1338,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         infiniteJump = not infiniteJump
         ButtonInstances.InfiniteJumpButton.Text = "无限跳跃 [" .. (infiniteJump and "开启]" or "关闭]")
-        ButtonInstances.InfiniteJumpButton.TextColor3 = infiniteJump and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.InfiniteJumpButton.TextColor3 = infiniteJump and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         showNotification("无限跳跃" .. (infiniteJump and "已开启" or "已关闭"), Color3.fromRGB(0, 150, 200))
     end
 
@@ -1391,7 +1374,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         climbing = not climbing
         ButtonInstances.ClimbWallButton.Text = "爬墙模式 [" .. (climbing and "开启]" or "关闭]")
-        ButtonInstances.ClimbWallButton.TextColor3 = climbing and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.ClimbWallButton.TextColor3 = climbing and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if climbing then
             connections.climb = RunService.Heartbeat:Connect(function()
@@ -1428,7 +1411,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         spinning = not spinning
         ButtonInstances.SpinButton.Text = "人物旋转 [" .. (spinning and "开启]" or "关闭]")
-        ButtonInstances.SpinButton.TextColor3 = spinning and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.SpinButton.TextColor3 = spinning and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if spinning then
             connections.spin = RunService.Heartbeat:Connect(function()
@@ -1457,7 +1440,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         autoMove = not autoMove
         ButtonInstances.AutoMoveButton.Text = "自动移动 [" .. (autoMove and "开启]" or "关闭]")
-        ButtonInstances.AutoMoveButton.TextColor3 = autoMove and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.AutoMoveButton.TextColor3 = autoMove and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if autoMove then
             connections.autoMove = RunService.Heartbeat:Connect(function()
@@ -1496,7 +1479,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         spinningOnNearest = not spinningOnNearest
         ButtonInstances.AutoSpinNearestButton.Text = "循环旋转最近玩家 [" .. (spinningOnNearest and "开启]" or "关闭]")
-        ButtonInstances.AutoSpinNearestButton.TextColor3 = spinningOnNearest and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.AutoSpinNearestButton.TextColor3 = spinningOnNearest and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if spinningOnNearest then
             connections.autoSpinNearest = RunService.Heartbeat:Connect(function()
@@ -1572,7 +1555,7 @@ print("安全版自然灾害免疫已激活")
         titleLabel.Position = UDim2.new(0, 10, 0, 0)
         titleLabel.BackgroundTransparency = 1
         titleLabel.Text = selectedPlayer.Name .. "的背包"
-        titleLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+        titleLabel.TextColor3 = Color3.fromRGB(0, 150, 255)
         titleLabel.TextSize = 18
         titleLabel.TextXAlignment = Enum.TextXAlignment.Left
         titleLabel.Font = Enum.Font.GothamBold
@@ -1751,7 +1734,7 @@ print("安全版自然灾害免疫已激活")
         playClickSound()
         nightVision = not nightVision
         ButtonInstances.NightVisionButton.Text = "夜视模式 [" .. (nightVision and "开启]" or "关闭]")
-        ButtonInstances.NightVisionButton.TextColor3 = nightVision and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(200, 200, 255)
+        ButtonInstances.NightVisionButton.TextColor3 = nightVision and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(200, 200, 255)
         
         if nightVision then
             -- 保存原始设置
@@ -1801,8 +1784,6 @@ print("安全版自然灾害免疫已激活")
         local color = colors[math.random(1, #colors)]
         
         MainFrame.BackgroundColor3 = Color3.new(color.R * 0.2, color.G * 0.2, color.B * 0.2)
-        MainStroke.Color = color
-        TitleBar.BackgroundColor3 = Color3.new(color.R * 0.3, color.G * 0.3, color.B * 0.3)
         ContentScrolling.ScrollBarImageColor3 = color
         
         for _, button in pairs(ButtonInstances) do
@@ -1897,7 +1878,7 @@ print("安全版自然灾害免疫已激活")
         
         if bulletTrackEnabled then
             ButtonInstances.BulletTrackButton.Text = "子弹追踪 [开启]"
-            ButtonInstances.BulletTrackButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.BulletTrackButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             local Camera = Workspace.CurrentCamera
             local Players = game:GetService("Players")
@@ -2396,7 +2377,7 @@ print("安全版自然灾害免疫已激活")
         
         if faceNearbyEnabled then
             ButtonInstances.FaceNearbyButton.Text = "循环面向附近玩家 [开启]"
-            ButtonInstances.FaceNearbyButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.FaceNearbyButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             connections.faceNearby = RunService.Heartbeat:Connect(function()
                 if faceNearbyEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -2442,7 +2423,7 @@ print("安全版自然灾害免疫已激活")
         
         if backNearbyEnabled then
             ButtonInstances.BackNearbyButton.Text = "循环背对附近玩家 [开启]"
-            ButtonInstances.BackNearbyButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.BackNearbyButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             connections.backNearby = RunService.Heartbeat:Connect(function()
                 if backNearbyEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -2489,7 +2470,7 @@ print("安全版自然灾害免疫已激活")
         
         if antiPullbackEnabled then
             ButtonInstances.AntiPullbackButton.Text = "防拉回 [开启]"
-            ButtonInstances.AntiPullbackButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+            ButtonInstances.AntiPullbackButton.TextColor3 = Color3.fromRGB(0, 150, 255)
             
             connections.antiPullback = RunService.Heartbeat:Connect(function()
                 if antiPullbackEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -3180,6 +3161,16 @@ print("安全版自然灾害免疫已激活")
             end
         end
     end
+
+    -- 去除按下后出现的选中边框（含之后动态创建的按钮）
+    local function stripSelection(object)
+        if object:IsA("GuiButton") then
+            object.Selectable = false
+            object.AutoButtonColor = false
+        end
+    end
+    for _, object in ipairs(ScreenGui:GetDescendants()) do stripSelection(object) end
+    ScreenGui.DescendantAdded:Connect(stripSelection)
 
     -- 标题栏、侧栏与内容按钮统一圆润化
     for _, object in ipairs(ScreenGui:GetDescendants()) do
